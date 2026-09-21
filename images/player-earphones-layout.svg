@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="1000" viewBox="0 0 500 1000" fill="none">
+<!-- Flat white earphones. The player occupies x90..410, y300..840. -->
+<defs>
+<path id="cord" d="M143 94 C158 125 168 145 170 177 C172 214 190 235 184 254 M346 130 C330 191 245 207 184 254 M184 254 C160 304 37 319 30 414 C24 464 54 505 109 520 C155 539 251 604 363 742 C416 808 483 842 470 897 C453 977 325 977 221 939 C89 891 -13 817 8 691 C19 608 80 540 142 468 L310 267 C342 229 369 236 367 276"/>
+</defs>
+<use href="#cord" stroke="#b9c9d3" stroke-width="6" stroke-linecap="round"/>
+<use href="#cord" stroke="#f9fcff" stroke-width="3.6" stroke-linecap="round"/>
+<!-- Left earpiece, lightly shaded without reflective materials. -->
+<g transform="translate(134 74) rotate(-30)">
+<rect x="-8" y="8" width="16" height="51" rx="6" fill="#f9fcff" stroke="#b9c9d3" stroke-width="1.3"/>
+<path d="M3 20V51" stroke="#dce6ed" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="0" cy="0" rx="27" ry="23" fill="#f9fcff" stroke="#b9c9d3" stroke-width="1.3"/>
+<ellipse cx="19" cy="-2" rx="5" ry="12" fill="#81919d"/>
+<path d="M-12 2H-4" stroke="#7e8d98" stroke-width="4" stroke-linecap="round"/>
+</g>
+<!-- Right earpiece -->
+<g transform="translate(355 106) rotate(26)">
+<rect x="-8" y="8" width="16" height="51" rx="6" fill="#f9fcff" stroke="#b9c9d3" stroke-width="1.3"/>
+<path d="M3 20V51" stroke="#dce6ed" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="0" cy="0" rx="27" ry="23" fill="#f9fcff" stroke="#b9c9d3" stroke-width="1.3"/>
+<ellipse cx="-19" cy="-2" rx="5" ry="12" fill="#81919d"/>
+<path d="M5 2H13" stroke="#7e8d98" stroke-width="4" stroke-linecap="round"/>
+</g>
+<!-- Y junction and plug seated at the player's upper right edge. -->
+<g transform="translate(184 254) rotate(30)">
+<rect x="-9" y="-13" width="18" height="29" rx="4" fill="#f7fbfe" stroke="#bdcbd5" stroke-width="1.3"/>
+</g>
+<rect x="362" y="275" width="10" height="13" rx="2" fill="#e0e8ee" stroke="#b9c9d3"/>
+<rect x="356" y="286" width="22" height="17" rx="3" fill="#f9fcff" stroke="#b9c9d3" stroke-width="1.3"/>
+</svg>

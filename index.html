@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LEFT's World</title>
+  <style>
+    @font-face {
+      font-family: "Ananda Black";
+      src: url("fonts/AnandaBlackPersonalUseRegular-rg9Rx.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: url("background.jpg") center / cover no-repeat;
+    }
+    .welcome {
+      margin: 0;
+      font-family: "Ananda Black", "Brush Script MT", cursive;
+      font-size: clamp(25px, calc(7.15vw + 1.1px), 107px);
+      font-weight: 700;
+      line-height: 1.5;
+      padding: 0.1em 0.15em;
+      text-align: center;
+      white-space: nowrap;
+      color: #102c60;
+      -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.95);
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.65)) drop-shadow(0 0 7px rgba(255, 255, 255, 0.35));
+      animation: fade-in 4s ease-out both;
+    }
+    .entrance {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .entrance:focus-visible {
+      outline: 3px solid white;
+      outline-offset: -6px;
+    }
+    /* 文字从上方浅蓝渐变至下方深蓝，搭配纤细白色发光描边。 */
+    @supports ((background-clip: text) or (-webkit-background-clip: text)) {
+      .welcome {
+        background: linear-gradient(to bottom, #345b91 0%, #142f5b 45%, #020c21 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+    }
+    /* 打开网页时，文字由透明逐渐变得清晰。 */
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .welcome { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="entrance" href="home.html" aria-label="进入 LEFT's World">
+    <h1 class="welcome">Welcome to LEFT's World</h1>
+  </a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

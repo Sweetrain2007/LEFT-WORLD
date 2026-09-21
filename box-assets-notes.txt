@@ -1,0 +1,13 @@
+Built-in image_gen used. Assets: images/box-lid.png, box-front.png, box-back.png, box-glow.png
+
+lid
+Use case: background-extraction. Edit target: supplied box asset for layered HTML composition. Remove ONLY the white background outside the rounded metal lid. Preserve complete lid, stickers, cat, motorcycle, blue texture, proportions and exact perspective. Do not redesign, add elements or change text. Output a single tightly framed PNG asset with real alpha transparency, same aspect ratio and framing as input. No checkerboard baked into pixels.
+
+front
+Use case: background-extraction. Edit target: supplied box asset for layered HTML composition. Extract front wall of box including front metal rim, latch, LEFT label and drums. Remove white exterior background AND remove the dark interior/opening ABOVE the front rim to actual transparency so objects behind can show through. Preserve exact front wall and proportions. Do not redesign, add elements or change text. Output a single tightly framed PNG asset with real alpha transparency, same aspect ratio and framing as input. No checkerboard baked into pixels.
+
+back
+Use case: background-extraction. Edit target: supplied box asset for layered HTML composition. Ensure background outside entire box is transparent. Preserve entire box including back interior, metal rim, cat sticker and all blue textures exactly. Do not redesign, add elements or change text. Output a single tightly framed PNG asset with real alpha transparency, same aspect ratio and framing as input. No checkerboard baked into pixels.
+
+glow
+Use case: background-extraction. Edit target: supplied box asset for layered HTML composition. Ensure background outside tray is transparent. Preserve tray interior with all stars, moon, glow, blue texture and metal outline exactly. Do not redesign, add elements or change text. Output a single tightly framed PNG asset with real alpha transparency, same aspect ratio and framing as input. No checkerboard baked into pixels.
