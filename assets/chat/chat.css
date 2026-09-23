@@ -1,0 +1,83 @@
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;color:#24364b;font:12px Tahoma,"SimSun","宋体",sans-serif}
+body{background:#b7c9de}
+button,textarea{font:inherit}button{color:inherit}
+.icon-definitions{position:absolute;width:0;height:0;overflow:hidden}
+.desktop{min-height:100svh;min-width:960px;display:flex;align-items:center;justify-content:center;padding:36px 28px}
+.chat-home{width:1120px;max-width:100%;display:grid;grid-template-columns:28% minmax(0,1fr);gap:14px;align-items:start}
+.xp-window{border:1px solid #1d4b91;box-shadow:inset 1px 0 #eef6ff,inset -1px -1px #7b96b5,3px 4px 0 rgba(45,66,91,.15);background:#e7edf5;border-radius:3px 3px 0 0;overflow:hidden}
+.title-bar{height:29px;display:flex;align-items:center;gap:6px;padding:3px 4px 3px 7px;background:linear-gradient(#6d9edb 0%,#356fc1 12%,#235daf 55%,#2f69b5 90%,#164d98 100%);border-top:1px solid #b8d5f5;border-bottom:1px solid #164887;color:#fff;flex-shrink:0}
+.title-bar h1,.title-bar h2{font:bold 12px Tahoma,"SimSun",sans-serif;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:1px 1px #254b7f;flex:1}
+.pixel-icon{display:block;width:16px;height:16px;flex-shrink:0;shape-rendering:crispEdges}
+.window-controls{display:flex;gap:3px}.window-controls>span{width:19px;height:19px;position:relative;border:1px solid #e1edfb;box-shadow:inset -1px -1px #1b4383,inset 1px 1px #90b6e8;background:#568bd0}
+.window-controls .close{background:#b56e62;box-shadow:inset -1px -1px #6f3e38,inset 1px 1px #dfa89a}
+.minimize::after{content:"";position:absolute;left:4px;bottom:4px;width:8px;height:2px;background:white}
+.maximize::after{content:"";position:absolute;inset:4px;border:1px solid white;border-top-width:3px}
+.close::before,.close::after{content:"";position:absolute;left:8px;top:3px;width:1px;height:11px;background:#fff;transform:rotate(45deg)}.close::after{transform:rotate(-45deg)}
+.contact-window{height:570px;display:flex;flex-direction:column}
+.contact-heading{height:62px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;border-bottom:1px solid #a7b9ce;background:#dbe6f3}
+.contact-heading strong{font-size:13px}.contact-heading>span{display:flex;align-items:center;gap:5px;color:#52708a;font-size:11px}
+.online-dot{display:inline-block;width:7px;height:7px;background:#64a951;border:1px solid #3f7b35;box-shadow:inset 1px 1px #c2e5b6;flex-shrink:0}
+.contact-tabs{height:30px;display:flex;align-items:end;padding:0 6px;border-bottom:1px solid #9eb1c8}
+.contact-tabs>span{padding:6px 24px 5px;background:#f6f8fc;border:1px solid #9eb1c8;border-bottom:1px solid #f6f8fc;margin-bottom:-1px;border-top:2px solid #789dce}
+.contact-list{flex:1;margin:0 6px 6px;background:#f6f8fc;border:1px solid #9eb1c8;border-top:0;padding:9px 4px}
+.group-label{display:flex;align-items:center;gap:6px;padding:6px 4px 12px;color:#355575}.group-label small{color:#75889b;margin-left:3px;font:11px Tahoma,sans-serif}
+.contact-item{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;text-align:left;border:1px solid transparent;background:none;cursor:pointer}
+.contact-item.selected{background:#d4e4f8;border-color:#9ab9e1;box-shadow:inset 0 1px #f4f8ff}
+.avatar-frame{position:relative;display:block;border:1px solid #8fabc7;background:#fff;padding:2px;width:42px;height:42px}
+.avatar-frame img,.profile-avatar img{display:block;width:100%;height:100%;object-fit:cover;object-position:80% center}
+.avatar-frame .online-dot{position:absolute;bottom:1px;right:1px}.contact-name{font:bold 12px Tahoma,sans-serif}.contact-name small{display:block;margin-top:5px;font:11px "SimSun",serif;color:#63805e}
+.window-status{height:24px;flex-shrink:0;display:flex;align-items:center;gap:6px;padding:3px 7px;background:#e2e9f1;border-top:1px solid #aab9cc;box-shadow:inset 0 1px #fff;color:#6b8097;font:10px Tahoma,sans-serif}
+.resize-grip{margin-left:auto;width:12px;height:12px;background:repeating-linear-gradient(135deg,transparent 0 3px,#a8b8cb 3px 4px,transparent 4px 6px);clip-path:polygon(100% 0,100% 100%,0 100%)}
+.chat-window{height:630px;display:flex;flex-direction:column}
+.chat-header{height:49px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid #9eafc5;background:#e6eef8;box-shadow:inset 0 1px #fff}
+.chat-header strong{font:bold 13px Tahoma,sans-serif}.chat-header>span{color:#7b8b9c;font-size:11px;margin-left:auto}
+.chat-body{display:grid;grid-template-columns:minmax(0,1fr) 156px;flex:1;min-height:0;padding:5px;gap:5px}
+.conversation{display:flex;flex-direction:column;min-width:0;min-height:0}
+.chat-history{flex:1;min-height:140px;display:flex;flex-direction:column;background:#fff;border:1px solid #9bafc7;box-shadow:inset 1px 1px #e4e9ee}
+.history-heading{padding:8px 10px;font-size:11px;color:#8a99a9;border-bottom:1px solid #edf0f5}.message-list{flex:1;overflow:auto;padding:12px}
+.chat-input{height:171px;flex-shrink:0;margin-top:5px;border:1px solid #9bafc7;background:#e9eef5;display:flex;flex-direction:column}
+.input-toolbar{height:29px;display:flex;gap:4px;align-items:center;border-bottom:1px solid #b5c2d2;box-shadow:inset 0 1px white;padding:2px 6px}
+.tool-button{display:grid;place-items:center;width:23px;height:22px;padding:0;border:1px solid transparent;background:transparent}.text-tool{font:bold 16px Georgia,serif;text-decoration:underline;color:#335a83}
+.toolbar-separator{height:17px;border-left:1px solid #afbed0;border-right:1px solid #fff;margin:0 3px}
+textarea{resize:none;flex:1;min-height:0;border:0;padding:8px;background:white;color:#24364b;line-height:1.5;outline-offset:-2px}
+.input-actions{height:35px;display:flex;align-items:center;justify-content:space-between;padding:4px 7px;border-top:1px solid #b5c2d2}.input-actions>span{font-size:10px;color:#8894a0}
+.xp-button{padding:4px 20px;background:#e8e9e5;border:1px solid #7a8b9d;box-shadow:inset 1px 1px white,inset -1px -1px #bbc4cd}.xp-button:disabled{color:#7d8894;text-shadow:1px 1px #fff}
+.profile-sidebar{border:1px solid #a5b7cd;background:#dfe9f6;display:flex;flex-direction:column;align-items:center;padding:0 10px}
+.sidebar-heading{width:calc(100% + 20px);padding:7px 9px;border-bottom:1px solid #a9bdd4;box-shadow:inset 0 1px white;color:#56738e;font-size:11px}
+.profile-avatar{display:block;width:110px;height:110px;margin:17px 0 10px;padding:4px;background:#f3f6fa;border:1px solid #809bbd;box-shadow:inset 1px 1px #fff,inset -1px -1px #c1cede;cursor:pointer}
+.profile-avatar:hover{border-color:#2c62a5;box-shadow:inset 1px 1px #fff,0 0 0 1px #9cb9de}.profile-avatar:active{box-shadow:inset 1px 1px #9eaec0}
+.profile-name{font:bold 12px Tahoma,sans-serif}.profile-status{margin-top:7px;display:flex;align-items:center;gap:5px;color:#6a7d8c;font-size:11px}
+.sidebar-divider{height:1px;background:#b4c6dc;box-shadow:0 1px #fff;width:100%;margin:20px 0 12px}
+.feature-list{width:100%;display:grid;gap:5px}.feature-button{display:flex;align-items:center;gap:9px;padding:7px 5px;width:100%;background:none;border:0;text-align:left;font-size:12px}.feature-button:disabled{color:#647e99}
+button:disabled{cursor:default}button:focus-visible,textarea:focus-visible{outline:1px dotted #17447c;outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-height:730px){.desktop{align-items:flex-start;padding-top:24px;padding-bottom:24px}}
+@media(max-width:959px){.desktop{justify-content:flex-start;padding:20px;min-width:960px}.chat-home{width:920px;flex-shrink:0}}
+/* First incoming message: preserve the existing shell geometry. */
+.avatar-frame img,.profile-avatar img{object-position:center}
+.contact-item{position:relative}
+.contact-item.has-new-message{animation:contact-message-notice 1200ms ease-in-out 1}
+.contact-item.has-new-message::after{content:"";position:absolute;right:12px;top:50%;width:13px;height:10px;margin-top:-5px;border:1px solid #8b763e;background:linear-gradient(32deg,transparent 47%,#ad995e 48%,#ad995e 53%,transparent 54%) left top/50% 100% no-repeat,linear-gradient(-32deg,transparent 47%,#ad995e 48%,#ad995e 53%,transparent 54%) right top/50% 100% no-repeat,#fff1b9;box-shadow:inset 0 1px #fff}
+@keyframes contact-message-notice{0%,45%,100%{background-color:#d4e4f8}20%,70%{background-color:#f5edcb}}
+.chat-history{overflow:hidden}
+.message-list{min-height:0}
+.incoming-message{display:flex;align-items:flex-start;gap:8px;margin:0 0 12px;animation:incoming-message-appear 200ms ease-out both}
+.message-avatar{display:block;width:32px;height:32px;object-fit:cover;object-position:center;border:1px solid #9bafc7;padding:1px;background:#fff;flex-shrink:0}
+.message-content{min-width:0}
+.message-sender{color:#356797;font:bold 11px Tahoma,sans-serif;margin:0 0 5px}
+.message-text{margin:0;padding:6px 9px;border:1px solid #b9cadb;background:#edf3fa;color:#24364b;font:12px Tahoma,sans-serif;line-height:1.5;overflow-wrap:anywhere}
+@keyframes incoming-message-appear{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.contact-item.has-new-message,.incoming-message{animation:none}}
+/* Shared content messages use the existing XP palette and compact borders. */
+.feature-button:not(:disabled){cursor:pointer}
+.feature-button:not(:disabled):hover{background:#d4e4f8}
+.feature-button:focus-visible{outline:1px dotted #17447c;outline-offset:-1px}
+.message-restored{animation:none}
+.share-message{position:relative;display:block;width:204px;max-width:100%;padding:9px 12px 11px;color:#294e78;text-decoration:none;border:1px solid #9bafc7;background:#e9eef5;box-shadow:inset 1px 1px #fff,inset -1px -1px #c1cede}
+.share-message-heading{display:flex;align-items:center;gap:7px;padding-bottom:8px;border-bottom:1px solid #c4d1e1;font-size:12px}
+.share-message-label{display:block;padding-top:10px;padding-right:15px;font-size:11px}
+.share-message-arrow{position:absolute;right:10px;bottom:10px}
+.share-message:hover{background:#dfeaf7}
+.share-message:active{box-shadow:inset 1px 1px #a7b9ce}
+.share-message:focus-visible{outline:1px dotted #17447c;outline-offset:2px}

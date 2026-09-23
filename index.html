@@ -1,87 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LEFT's World</title>
-  <style>
-    @font-face {
-      font-family: "Ananda Black";
-      src: url("fonts/AnandaBlackPersonalUseRegular-rg9Rx.ttf") format("truetype");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      min-height: 100svh;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      font-family: Arial, "Microsoft YaHei", sans-serif;
-      background: url("background.jpg") center / cover no-repeat;
-    }
-    .welcome {
-      margin: 0;
-      font-family: "Ananda Black", "Brush Script MT", cursive;
-      font-size: clamp(25px, calc(7.15vw + 1.1px), 107px);
-      font-weight: 700;
-      line-height: 1.5;
-      padding: 0.1em 0.15em;
-      text-align: center;
-      white-space: nowrap;
-      color: #102c60;
-      -webkit-text-stroke: 0.25px rgba(255, 255, 255, 0.95);
-      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.65)) drop-shadow(0 0 7px rgba(255, 255, 255, 0.35));
-      animation: fade-in 4s ease-out both;
-    }
-    .entrance {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      text-decoration: none;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .entrance:focus-visible {
-      outline: 3px solid white;
-      outline-offset: -6px;
-    }
-    /* 文字从上方浅蓝渐变至下方深蓝，搭配纤细白色发光描边。 */
-    @supports ((background-clip: text) or (-webkit-background-clip: text)) {
-      .welcome {
-        background: linear-gradient(to bottom, #345b91 0%, #142f5b 45%, #020c21 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-    }
-    /* 打开网页时，文字由透明逐渐变得清晰。 */
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .welcome { animation: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LEFT’S WORLD</title>
+<link rel="preload" href="assets/intro/PressStart2P-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="assets/intro/intro.css">
+<script defer src="assets/intro/config.js"></script>
+<script defer src="assets/intro/intro.js"></script>
 </head>
 <body>
-  <a class="entrance" href="home.html" aria-label="进入 LEFT's World">
-    <h1 class="welcome">Welcome to LEFT's World</h1>
+<main id="intro" class="intro">
+  <div id="computer" class="computer">
+    <img class="computer-image" src="assets/intro/computer.png" width="1318" height="1193" alt="LEFT 银色 Y2K 电脑" draggable="false">
+    <button id="screen-button" class="screen-button" type="button" aria-label="点击电脑屏幕，进入开屏"></button>
+  </div>
+</main>
+<div id="media-layer" class="media-layer" aria-hidden="true">
+  <video id="flicker-video" autoplay muted playsinline loop preload="auto" disablepictureinpicture></video>
+  <video id="intro-video" muted playsinline preload="auto" disablepictureinpicture></video>
+  <canvas id="last-frame" hidden></canvas>
+</div>
+<section id="welcome-screen" class="welcome-screen" aria-label="Welcome" hidden>
+  <a id="welcome-link" class="welcome-link" href="home.html" aria-label="Welcome to LEFT’s World，进入主页" tabindex="-1">
+    <span id="welcome-text" aria-hidden="true"></span><span id="typing-cursor" aria-hidden="true">|</span>
   </a>
+</section>
+<button id="media-retry" class="media-retry" type="button" hidden>视频加载失败，点击重试</button>
+<noscript><a class="noscript-entry" href="home.html">进入主页</a></noscript>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
