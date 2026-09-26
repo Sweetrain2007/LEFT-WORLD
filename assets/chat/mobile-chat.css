@@ -1,0 +1,60 @@
+/* The PC stylesheet is unchanged. This surface only appears below 768px. */
+.mobile-chat{display:none}
+@media(max-width:767px){
+  html,body{min-width:0;width:100%;height:100%;overflow:hidden}
+  body{background:#dbe5ef}
+  .desktop{display:none}
+  .mobile-chat{
+    display:flex;flex-direction:column;width:100%;height:100vh;height:100dvh;
+    min-height:100dvh;overflow:hidden;
+    padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);
+    background:#dce6f1;color:#203e60;font:12px Tahoma,"SimSun","宋体",sans-serif;
+  }
+  .mobile-chat button,.mobile-chat textarea{font:inherit;border-radius:0}
+  .mobile-titlebar{display:grid;grid-template-columns:72px 1fr 72px;align-items:center;min-height:32px;flex-shrink:0;padding:0 8px;border-top:1px solid #9cbfeb;border-bottom:1px solid #17477e;background:linear-gradient(#5d8fc9,#2860a4);color:#fff;text-shadow:1px 1px #244c7d}
+  .mobile-titlebar h1{margin:0;text-align:center;font:bold 13px Tahoma,sans-serif;letter-spacing:.03em}
+  .mobile-back{display:flex;align-items:center;min-height:32px;color:#fff;text-decoration:none;font-size:12px}
+  .mobile-signal{justify-self:end;font-size:11px;letter-spacing:1px}
+  .mobile-contact{display:flex;align-items:center;gap:8px;min-height:54px;padding:7px 9px;flex-shrink:0;background:#e4ecf5;border-bottom:1px solid #9fb5cf;box-shadow:inset 0 1px #fff}
+  .mobile-avatar{display:block;width:34px;height:34px;padding:2px;background:#fff;border:1px solid #899fb8;box-shadow:1px 1px #c1cedb;cursor:pointer}
+  .mobile-avatar img{display:block;width:100%;height:100%;object-fit:cover}
+  .mobile-contact strong{font-size:12px}
+  .mobile-online{display:flex;align-items:center;gap:4px;margin-top:4px;font-size:10px;color:#54704a}
+  .mobile-online .online-dot{width:6px;height:6px}
+  .mobile-brand{margin-left:auto;font:9px Tahoma,sans-serif;letter-spacing:.04em;color:#738aa4}
+  .mobile-notice{display:none;align-items:center;gap:4px;margin-left:auto;font-size:11px;color:#72613b}
+  .mobile-contact.has-new-message{animation:mobile-message-notice 1200ms ease-in-out 1}
+  .mobile-contact.has-new-message .mobile-notice{display:flex}
+  .mobile-contact.has-new-message .mobile-brand{display:none}
+  .mobile-history-label{flex-shrink:0;padding:3px 9px;border-top:1px solid #fff;border-bottom:1px solid #c5d1df;background:#d5e1ee;font-size:10px;color:#657e99}
+  .mobile-history{display:flex;flex:1;min-height:0;overflow:hidden;border-left:1px solid #b3c2d3;border-right:1px solid #b3c2d3;background:#f0f4f8}
+  .mobile-message-list{width:100%;padding:10px 8px;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .mobile-chat .incoming-message{gap:7px;margin-bottom:13px}
+  .mobile-chat .message-avatar{width:26px;height:26px;padding:1px;border-color:#9caec2}
+  .mobile-chat .message-content{flex:1;min-width:0}
+  .mobile-chat .message-sender{display:flex;align-items:baseline;gap:9px;font-size:11px;margin-bottom:4px;color:#2d6493}
+  .mobile-message-time{font:10px Tahoma,sans-serif;color:#7a8796}
+  .mobile-chat .message-text{display:inline-block;max-width:100%;padding:4px 6px;font-size:12px;line-height:1.55;background:#e8f0f8;border:1px solid #c1d1e2;border-radius:0}
+  .mobile-chat .share-message{width:210px;max-width:100%;padding:6px 8px 8px;background:#e2ebf4;border-color:#99afc8;box-shadow:inset 1px 1px #fff,inset -1px -1px #c1cbd8}
+  .mobile-chat .share-message-heading{gap:5px;padding-bottom:5px;font-size:11px}
+  .mobile-chat .share-message-label{font-size:11px;padding-top:7px;line-height:1.4}
+  .mobile-chat .share-message-arrow{bottom:8px;right:9px;font-size:12px}
+  .mobile-composer{flex-shrink:0;margin:0;border-top:1px solid #91a6be;background:#e5e9ed}
+  .mobile-tools{display:flex;align-items:center;gap:4px;height:28px;padding:2px 7px;box-shadow:inset 0 1px #fff;border-bottom:1px solid #b3c0cf}
+  .mobile-tools button{display:flex;align-items:center;gap:3px;padding:2px 5px;border:0;background:none;color:#62788c}
+  .mobile-tools>span{margin-left:auto;color:#8795a4;font-size:10px}
+  .mobile-chat .pixel-icon{width:13px;height:13px}
+  .mobile-draft-row{display:flex;align-items:stretch;gap:5px;padding:5px 6px}
+  .mobile-draft-row textarea{width:0;min-width:0;flex:1;height:40px;padding:4px 5px;border:1px solid #94a8bf;box-shadow:inset 1px 1px #d1dae3;font-size:16px;line-height:1.2;background:#fff}
+  .mobile-draft-row>button{width:46px;border:1px solid #8e9faf;box-shadow:inset 1px 1px #fff,inset -1px -1px #bbc5cf;background:#e8ecef;color:#8593a1;text-shadow:1px 1px white}
+  .mobile-sharebar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;flex-shrink:0;padding:4px 5px 5px;border-top:1px solid #9faec0;box-shadow:inset 0 1px white;background:#d4dee9}
+  .mobile-sharebar button{display:flex;align-items:center;justify-content:center;gap:5px;min-height:36px;padding:4px 2px;border:1px solid #8fabc4;box-shadow:inset 1px 1px white,inset -1px -1px #bbc9d7;background:#e5ecf3;font-size:11px;color:#304f73;cursor:pointer}
+  .mobile-sharebar button:active:not(:disabled){box-shadow:inset 1px 1px #9dafc4;background:#d2dfed}
+  .mobile-sharebar button:disabled{color:#8a9bab;cursor:default}
+  .mobile-sharebar button[aria-busy="true"]{background:#dce6f0}
+  .mobile-chat a:focus-visible{outline:1px dotted currentColor;outline-offset:-2px}
+  @keyframes mobile-message-notice{0%,45%,100%{background:#e4ecf5}20%,70%{background:#f4edcf}}
+}
+@media(max-width:767px) and (prefers-reduced-motion:reduce){
+  .mobile-contact.has-new-message{animation:none}
+}

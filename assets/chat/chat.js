@@ -4,7 +4,8 @@
   if (contact.dataset.chatInitialized === "true") return;
   contact.dataset.chatInitialized = "true";
   const config = window.LEFT_CHAT_CONFIG;
-  const list = document.querySelector(".message-list");
+  const lists = [...document.querySelectorAll(".message-list")];
+  const mobileContact = document.getElementById("mobile-contact");
   const buttons = [...document.querySelectorAll("[data-share]")];
   const records = new Map();
   const pending = new Map();
@@ -20,12 +21,15 @@
   function clearNotice() {
     clearTimeout(noticeTimer);
     contact.classList.remove("has-new-message");
+    mobileContact.classList.remove("has-new-message");
     contact.removeAttribute("aria-label");
   }
   function notify() {
     clearNotice();
     void contact.offsetWidth;
     contact.classList.add("has-new-message");
+    void mobileContact.offsetWidth;
+    mobileContact.classList.add("has-new-message");
     contact.setAttribute("aria-label", "LEFT，收到一条新消息");
     noticeTimer = setTimeout(clearNotice, 1200);
   }
@@ -37,7 +41,12 @@
   }
   function appendMessage(message, animate = true) {
     if (records.has(message.id)) return;
+    message = {...message, receivedAt: new Date()};
     records.set(message.id, message);
+    lists.forEach(list => renderMessage(message, list, animate));
+    if (animate) notify();
+  }
+  function renderMessage(message, list, animate) {
     const row = element("article", "incoming-message" + (animate ? "" : " message-restored"));
     row.dataset.messageId = message.id;
     const image = element("img", "message-avatar");
@@ -45,7 +54,14 @@
     image.alt = "LEFT 头像";
     image.width = image.height = 32;
     const content = element("div", "message-content");
-    content.append(element("div", "message-sender", "LEFT"));
+    const sender = element("div", "message-sender", "LEFT");
+    if (list.hasAttribute("data-mobile-messages")) {
+      const time = element("time", "mobile-message-time",
+        message.receivedAt.toLocaleTimeString("zh-CN", {hour:"2-digit", minute:"2-digit", hour12:false}));
+      time.dateTime = message.receivedAt.toISOString();
+      sender.append(time);
+    }
+    content.append(sender);
     if (message.type === "text") {
       content.append(element("p", "message-text", message.text));
     } else {
@@ -66,7 +82,6 @@
     row.append(image, content);
     list.append(row);
     list.scrollTop = list.scrollHeight;
-    if (animate) notify();
   }
   function receiveIntro() {
     if (document.hidden) return;
@@ -75,17 +90,21 @@
   function requestShare(type) {
     const id = type + "-share";
     if (records.has(id) || pending.has(type)) return;
-    const button = buttons.find(item => item.dataset.share === type);
-    button.disabled = true;
-    button.setAttribute("aria-busy", "true");
+    const matching = buttons.filter(item => item.dataset.share === type);
+    matching.forEach(button => {
+      button.disabled = true;
+      button.setAttribute("aria-busy", "true");
+    });
     pending.set(type, setTimeout(() => {
       pending.delete(type);
       // The greeting always precedes requested content, even with an early click.
       clearTimeout(firstTimer);
       appendMessage(intro);
       appendMessage({id, sender: "left", type});
-      button.disabled = false;
-      button.removeAttribute("aria-busy");
+      matching.forEach(button => {
+        button.disabled = false;
+        button.removeAttribute("aria-busy");
+      });
     }, config.shareMessageDelay));
   }
   function restoreBase() {
@@ -94,7 +113,7 @@
     pending.clear();
     clearNotice();
     records.clear();
-    list.replaceChildren();
+    lists.forEach(list => list.replaceChildren());
     appendMessage(intro, false);
     buttons.forEach(button => {
       button.disabled = false;
@@ -117,10 +136,15 @@
     else firstTimer = setTimeout(receiveIntro, config.firstMessageDelay);
   }
   contact.addEventListener("click", selectContact);
-  document.getElementById("profile-avatar").addEventListener("click", () => {
+  ["profile-avatar", "mobile-profile-avatar"].forEach(id => document.getElementById(id).addEventListener("click", () => {
     document.dispatchEvent(new CustomEvent("left:open-profile", {detail: {contactId: "left", source: "avatar"}}));
-  });
-  document.getElementById("chat-input").addEventListener("submit", event => event.preventDefault());
+  }));
+  ["chat-input", "mobile-chat-input"].forEach(id =>
+    document.getElementById(id).addEventListener("submit", event => event.preventDefault()));
+  const drafts = ["message-draft", "mobile-message-draft"].map(id => document.getElementById(id));
+  drafts.forEach(draft => draft.addEventListener("input", () => {
+    drafts.forEach(other => { if (other !== draft) other.value = draft.value; });
+  }));
   buttons.forEach(button => button.addEventListener("click", () => requestShare(button.dataset.share)));
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden && scheduled && !records.has("intro")) {

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>LEFT'S WORLD · 聊天</title>
 <link rel="stylesheet" href="assets/chat/chat.css">
+<link rel="stylesheet" href="assets/chat/mobile-chat.css">
 <script src="assets/chat/legacy-routes.js"></script>
 <script defer src="assets/chat/config.js"></script>
 <script defer src="assets/chat/chat.js"></script>
@@ -59,4 +60,34 @@
 <footer class="window-status">LEFT'S WORLD<span class="resize-grip" aria-hidden="true"></span></footer>
 </section>
 </div></main>
+
+<main class="mobile-chat" aria-label="LEFT’S WORLD 手机聊天">
+  <header class="mobile-titlebar">
+    <a href="index.html" class="mobile-back" aria-label="返回开屏">‹ 返回</a>
+    <h1>LEFT</h1><span class="mobile-signal" aria-hidden="true">▂▄▆</span>
+  </header>
+  <div class="mobile-contact" id="mobile-contact">
+    <button type="button" class="mobile-avatar" id="mobile-profile-avatar" aria-label="打开 LEFT 个人资料"><img data-left-avatar alt="LEFT 头像" draggable="false"></button>
+    <div><strong>LEFT</strong><span class="mobile-online"><i class="online-dot"></i> 在线</span></div>
+    <span class="mobile-notice" aria-hidden="true"><svg class="pixel-icon"><use href="#chat"/></svg>新消息</span>
+    <span class="mobile-brand">LEFT’S WORLD</span>
+  </div>
+  <div class="mobile-history-label">消息记录</div>
+  <section class="mobile-history" aria-label="与 LEFT 聊天">
+    <div class="message-list mobile-message-list" data-mobile-messages role="log" aria-live="polite" aria-label="LEFT 的消息"></div>
+  </section>
+  <form class="mobile-composer" id="mobile-chat-input">
+    <div class="mobile-tools" role="group" aria-label="输入工具">
+      <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#face"/></svg>表情</button>
+      <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>图片</button>
+      <span>发送功能暂未开放</span>
+    </div>
+    <div class="mobile-draft-row"><label class="sr-only" for="mobile-message-draft">消息输入框</label><textarea id="mobile-message-draft" rows="2" spellcheck="false" aria-label="消息草稿"></textarea><button type="submit" disabled>发送</button></div>
+  </form>
+  <nav class="mobile-sharebar" aria-label="共享功能">
+    <button type="button" data-share="location"><svg class="pixel-icon" aria-hidden="true"><use href="#pin"/></svg>共享位置</button>
+    <button type="button" data-share="music"><svg class="pixel-icon" aria-hidden="true"><use href="#music"/></svg>分享音乐</button>
+    <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>发送照片</button>
+  </nav>
+</main>
 </body></html>
