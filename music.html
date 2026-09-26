@@ -245,6 +245,18 @@ html{scroll-behavior:smooth}
   const counter = shell.querySelector(".player-counter");
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
   const storageKey = "left-stage-player-active-index";
+  const entryUrl = new URL(location.href);
+  let musicView = entryUrl.searchParams.get("view") === "player" ||
+    (history.state && history.state.musicView === "player") ? "player" : "intro";
+  // Consume the return marker; only this history entry remembers the view.
+  entryUrl.searchParams.delete("view");
+  history.replaceState({...history.state, musicView}, "", entryUrl.href);
+  section.dataset.musicView = musicView;
+  function rememberPlayer() {
+    musicView = "player";
+    section.dataset.musicView = musicView;
+    history.replaceState({...history.state, musicView}, "");
+  }
   let activeIndex = 0, confirming = false, nativeNavigation = false;
   let confirmTimer, entranceTimer, counterAnimation, pointerFrame;
   function storedIndex() {
@@ -279,6 +291,7 @@ html{scroll-behavior:smooth}
     if (confirming) return;
     clearTimeout(entranceTimer);
     shell.classList.remove("player-arriving", "player-pending");
+    rememberPlayer();
     confirming = true;
     const target = rows[activeIndex];
     shell.classList.add("player-confirming");
@@ -347,6 +360,11 @@ html{scroll-behavior:smooth}
   });
   section.addEventListener("pointerleave", resetTilt);
   function arrive() {
+    if (musicView === "player") {
+      shell.classList.remove("player-pending", "player-arriving");
+      return;
+    }
+    rememberPlayer();
     shell.classList.remove("player-pending");
     if (!motion.matches) {
       shell.classList.add("player-arriving");
@@ -356,7 +374,7 @@ html{scroll-behavior:smooth}
   select(storedIndex(), false);
   if ("ResizeObserver" in window) new ResizeObserver(positionBar).observe(list);
   else window.addEventListener("resize", positionBar);
-  if (!motion.matches && "IntersectionObserver" in window) {
+  if (musicView === "intro" && !motion.matches && "IntersectionObserver" in window) {
     shell.classList.add("player-pending");
     const observer = new IntersectionObserver(entries => {
       if (entries.some(entry => entry.isIntersecting)) { arrive(); observer.disconnect(); }
@@ -373,6 +391,7 @@ html{scroll-behavior:smooth}
   });
   window.addEventListener("pageshow", event => {
     if (!event.persisted) return;
+    rememberPlayer();
     clearTimeout(confirmTimer);
     clearTimeout(entranceTimer);
     confirming = false;

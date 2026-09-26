@@ -17,6 +17,7 @@
   </div>
 </main>
 <div id="media-layer" class="media-layer" aria-hidden="true">
+  <img id="screen-fallback" src="assets/intro/screen-fallback.webp" alt="">
   <video id="flicker-video" autoplay muted playsinline loop preload="auto" disablepictureinpicture></video>
   <video id="intro-video" muted playsinline preload="auto" disablepictureinpicture></video>
   <canvas id="last-frame" hidden></canvas>
@@ -26,7 +27,6 @@
     <span id="welcome-text" aria-hidden="true"></span><span id="typing-cursor" aria-hidden="true">|</span>
   </a>
 </section>
-<button id="media-retry" class="media-retry" type="button" hidden>视频加载失败，点击重试</button>
 <noscript><a class="noscript-entry" href="home.html">进入主页</a></noscript>
 </body>
 </html>

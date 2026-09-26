@@ -5,15 +5,15 @@
   const intro = $("intro"), computer = $("computer"), screen = $("screen-button");
   const layer = $("media-layer"), flicker = $("flicker-video"), movie = $("intro-video");
   const canvas = $("last-frame"), welcome = $("welcome-screen"), link = $("welcome-link");
-  const text = $("welcome-text"), cursor = $("typing-cursor"), retry = $("media-retry");
+  const text = $("welcome-text"), cursor = $("typing-cursor");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const b = c.screenBounds, size = c.imageSize;
 
 
   const order = ["idle","zooming","transitioning","introVideo","welcome","entering"];
-  let state = "idle", zoomDone = false, playing = false, fading = false;
+  let state = "idle", zoomDone = false, fading = false;
   let crossfadeTimer, zoomAnimation, layerAnimation, videoFrame, polling;
-  let frameReady = false, typingStarted = false, starting = false;
+  let frameReady = false, typingStarted = false;
   let typingTimer, cursorTimer, typedCount = 0;
   const characters = Array.from(c.welcomeText);
   link.setAttribute("aria-label", c.welcomeText + "，进入主页");
@@ -29,7 +29,70 @@
   computer.style.setProperty("--screen-top", b.y / size.height * 100 + "%");
   computer.style.setProperty("--screen-width", b.width / size.width * 100 + "%");
   computer.style.setProperty("--screen-height", b.height / size.height * 100 + "%");
-  flicker.muted = movie.muted = true;
+
+  let autoplayAllowed = false, staticMode = false, watchdog, staticTimer;
+  let moviePlaying = false, tracking = false, progressTime = -1;
+  let moviePrimed = false, movieStarted = false;
+  function prepare(video) {
+    video.muted = true; video.defaultMuted = true; video.playsInline = true;
+    video.controls = false; video.disablePictureInPicture = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+  }
+  function play(video, onFailure) {
+    prepare(video);
+    try {
+      const promise = video.play();
+      if (promise && typeof promise.then === "function") promise.then(() => {
+        if(video === flicker && state === "idle") {
+          autoplayAllowed = true;
+          document.body.dataset.autoplayAllowed = "true";
+        }
+      }).catch(error => {
+        // Pausing the initial gesture-authorized playback can abort its pending promise.
+        if(video === movie && moviePrimed && !movieStarted && error.name === "AbortError")return;
+        if(!document.hidden)onFailure(error);
+      });
+    } catch(error) {onFailure(error);}
+  }
+  function stopTracking() {
+    tracking = false;
+    if(videoFrame != null && movie.cancelVideoFrameCallback)movie.cancelVideoFrameCallback(videoFrame);
+    cancelAnimationFrame(polling);
+  }
+  function armWatchdog() {
+    clearTimeout(watchdog);
+    if(!document.hidden && !staticMode && !movie.ended && state !== "idle" && state !== "entering")
+      watchdog = setTimeout(useStatic,c.mediaTimeout);
+  }
+  function staticWelcome() {
+    if(document.hidden || !staticMode || state !== "introVideo")return;
+    setState("welcome");startTyping();
+  }
+  function useStatic() {
+    if(staticMode || state === "idle" || state === "entering")return;
+    staticMode = true;
+    document.body.dataset.playbackMode = "static-fallback";
+    clearTimeout(watchdog); stopTracking();
+    fadeAnimations.forEach(a=>a.cancel());fadeAnimations=[];
+    flicker.pause();movie.pause();
+    flicker.style.opacity = movie.style.opacity = "0";
+    flicker.style.visibility = movie.style.visibility = "hidden";
+    if(frameReady)canvas.hidden=false;
+    if(state === "transitioning")setState("introVideo");
+    if(state === "introVideo")staticTimer=setTimeout(staticWelcome,c.typingStartTime*1000);
+  }
+  function autoRejected() {
+    autoplayAllowed = false;
+    document.body.dataset.autoplayAllowed = "false";
+    if(state !== "idle")return;
+    flicker.style.opacity="0";flicker.style.visibility="hidden";
+    document.body.dataset.playbackMode="gesture-fallback";
+  }
+  prepare(flicker);prepare(movie);
+  $("screen-fallback").src=c.screenFallback;
+  flicker.poster=movie.poster=c.screenFallback;
   flicker.src = c.flickerVideo;
   movie.src = c.introVideo;
   movie.loop = false;
@@ -49,8 +112,7 @@
     if (movie.readyState < 2 || !movie.videoWidth) return;
     if (canvas.width !== movie.videoWidth) canvas.width = movie.videoWidth;
     if (canvas.height !== movie.videoHeight) canvas.height = movie.videoHeight;
-    canvas.getContext("2d").drawImage(movie,0,0,canvas.width,canvas.height);
-    frameReady = true;
+    try { canvas.getContext("2d").drawImage(movie,0,0,canvas.width,canvas.height); frameReady = true; } catch (_) {}
   }
   function checkTypingTime() {
     if (state === "introVideo" && movie.currentTime >= c.typingStartTime) {
@@ -59,19 +121,16 @@
     }
   }
   function trackFrames() {
-    if (movie.requestVideoFrameCallback) {
-      videoFrame = movie.requestVideoFrameCallback(() => {
-        keepFrame();
-        checkTypingTime();
-        if (!movie.ended && state !== "entering") trackFrames();
-      });
-    } else {
-      polling = requestAnimationFrame(() => {
-        keepFrame();
-        checkTypingTime();
-        if (!movie.ended && state !== "entering") trackFrames();
-      });
+    if(tracking)return;
+    tracking=true;
+    function frame() {
+      if(!tracking)return;
+      keepFrame();checkTypingTime();
+      if(movie.ended || movie.paused || state === "entering"){tracking=false;return;}
+      if(movie.requestVideoFrameCallback)videoFrame=movie.requestVideoFrameCallback(frame);
+      else polling=requestAnimationFrame(frame);
     }
+    frame();
   }
   function finishTyping() {
     link.classList.add("is-ready");
@@ -97,44 +156,45 @@
     typeNext();
   }
   function movieReady() {
-    if (state !== "transitioning" || fading) return;
+    if (document.hidden || state !== "transitioning" || fading || staticMode || !moviePlaying || !moviePrimed || movie.seeking || movie.readyState < 2) return;
     fading = true;
+    movie.style.visibility = "visible";
     const duration = reduced.matches ? 0 : c.crossfadeDuration;
-    // Reveal the decoded movie, not an empty video element; retain flicker until ready.
+    // Dissolve to the paused first frame. Advance the movie only once it is fully visible.
     fadeAnimations = [
       movie.animate([{opacity:0},{opacity:1}],{duration,easing:"ease-in-out",fill:"forwards"}),
-      flicker.animate([{opacity:1},{opacity:0}],{duration,easing:"ease-in-out",fill:"forwards"})
+      flicker.animate([{opacity:flicker.style.opacity || "0"},{opacity:0}],{duration,easing:"ease-in-out",fill:"forwards"})
     ];
-    trackFrames();
     Promise.all(fadeAnimations.map(a=>a.finished)).then(() => {
+      if(staticMode)return;
       flicker.pause();
       movie.style.opacity = "1";
       flicker.style.opacity = "0";
       fadeAnimations.forEach(a=>a.cancel());
       fadeAnimations = [];
       setState("introVideo");
-      checkTypingTime();
+      movieStarted = true;
+      progressTime = -1;
+      if(!document.hidden){play(movie,useStatic);armWatchdog();}
+
     }).catch(() => {});
   }
-  async function startMovie() {
-    if (state === "zooming") setState("transitioning");
-    if (state !== "transitioning" || playing || starting) return;
-    starting = true;
-    try {
-      await movie.play();
-      playing = true;
-      retry.hidden = true;
-      // 'playing' means data is available; wait for an actual decoded frame if supported.
-      if (movie.requestVideoFrameCallback) movie.requestVideoFrameCallback(movieReady);
-      else movieReady();
-    } catch (_) {
-      retry.textContent = "继续播放";
-      retry.hidden = false;
-    } finally { starting = false; }
+  function startMovie() {
+    if(state === "zooming")setState("transitioning");
+    if(state !== "transitioning")return;
+    if(staticMode) {
+      setState("introVideo");
+      staticTimer=setTimeout(staticWelcome,c.typingStartTime*1000);
+    } else {movieReady();armWatchdog();}
   }
-  screen.addEventListener("click", () => {
-    if (!setState("zooming")) return;
-    screen.disabled = true;
+  function begin(event) {
+    if(event.type === "pointerup" && (event.button !== 0 || event.isPrimary === false))return;
+    if(!setState("zooming"))return;
+    screen.disabled=true;
+    // Synchronous calls within the screen gesture, before any timer or await.
+    play(flicker,()=>{});
+    play(movie,useStatic);
+    armWatchdog();
     const rect = screenRect(), model = computer.getBoundingClientRect();
     const scale = Math.max(innerWidth/rect.width,innerHeight/rect.height);
     const tx=innerWidth/2-model.left-(rect.left-model.left+rect.width/2)*scale;
@@ -156,30 +216,56 @@
     layerAnimation=layer.animate(frames,{duration:c.zoomDuration,easing:"cubic-bezier(.4,0,.2,1)",fill:"forwards"});
     crossfadeTimer=setTimeout(startMovie,c.crossfadeStart);
     zoomAnimation.finished.then(finishZoom).catch(()=>{});
+  }
+  screen.addEventListener("pointerup",begin);
+  screen.addEventListener("click",begin);
+  flicker.addEventListener("playing",()=>{
+    if(staticMode || fading || !["idle","zooming","transitioning"].includes(state))return;
+    if(state === "idle"){autoplayAllowed=true;document.body.dataset.autoplayAllowed="true";}
+    flicker.style.visibility="visible";flicker.style.opacity="1";
+    document.body.dataset.playbackMode=state === "idle" ? "autoplay" : (autoplayAllowed ? "autoplay" : "user-gesture");
   });
-  movie.addEventListener("timeupdate",checkTypingTime);
+  flicker.addEventListener("error",()=>{
+    flicker.style.visibility="hidden";flicker.style.opacity="0";
+    if(state === "idle")document.body.dataset.playbackMode="gesture-fallback";
+  });
+  movie.addEventListener("playing",()=>{
+    if(state === "idle" || state === "entering" || staticMode){movie.pause();return;}
+    moviePlaying=true;
+    if(!moviePrimed) {
+      // Acquire permission in the click, then hold frame zero throughout zoom/crossfade.
+      moviePrimed=true;
+      movie.pause();
+      stopTracking();
+      try {movie.currentTime=0;} catch (_) {useStatic();return;}
+      movieReady();
+      return;
+    }
+    document.body.dataset.playbackMode=autoplayAllowed ? "autoplay" : "user-gesture";
+    if(state === "introVideo" || state === "welcome"){movie.style.visibility="visible";movie.style.opacity="1";canvas.hidden=true;}
+    armWatchdog();movieReady();trackFrames();
+  });
+  movie.addEventListener("seeked",movieReady);
+  movie.addEventListener("loadeddata",movieReady);
+  movie.addEventListener("timeupdate",()=>{
+    checkTypingTime();
+    if(movie.currentTime > progressTime){progressTime=movie.currentTime;armWatchdog();}
+  });
   movie.addEventListener("ended",()=>{
+    clearTimeout(watchdog);stopTracking();
     keepFrame();
     if(frameReady) canvas.hidden=false;
     checkTypingTime();
 
+    if(state === "introVideo"){setState("welcome");startTyping();}
     // Preserve the final video frame. Typing continues; there is no automatic navigation.
   });
-  movie.addEventListener("error",()=>{
-    if(state==="idle") return;
-    retry.textContent="视频加载失败，点击重试";retry.hidden=false;
-  });
-  retry.addEventListener("click",()=>{
-
-    if(state==="idle"){flicker.play().then(()=>retry.hidden=true).catch(()=>{});return;}
-    if(movie.error){movie.load();playing=false;}
-    startMovie();
-  });
+  movie.addEventListener("error",useStatic);
   link.addEventListener("click",async event=>{
     if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
     event.preventDefault();
     if(state!=="welcome"||!link.classList.contains("is-ready"))return;
-    setState("entering");
+    setState("entering");clearTimeout(watchdog);
     movie.pause();
     keepFrame();
     if(frameReady)canvas.hidden=false;
@@ -200,32 +286,36 @@
     }
 
   });
-  document.addEventListener("visibilitychange", () => {
+  function resume() {
+    if(document.hidden)return;
     clearTimeout(typingTimer);
-    if (!document.hidden && state === "welcome" && typingStarted && typedCount < characters.length) {
-      typingTimer = setTimeout(typeNext,c.typingSpeed);
+    if(typingStarted && typedCount < characters.length)typingTimer=setTimeout(typeNext,c.typingSpeed);
+    else if(typingStarted)cursor.hidden=true;
+    if(staticMode){clearTimeout(staticTimer);staticTimer=setTimeout(staticWelcome,0);return;}
+    if(state === "idle")play(flicker,autoRejected);
+    else if(!movieStarted && moviePrimed) {
+      if(state === "zooming")play(flicker,()=>{});
+      movieReady();armWatchdog();
     }
-  });
-  window.addEventListener("pagehide",()=>{
-    clearTimeout(crossfadeTimer);clearTimeout(typingTimer);clearTimeout(cursorTimer);flicker.pause();movie.pause();
-    if(videoFrame&&movie.cancelVideoFrameCallback)movie.cancelVideoFrameCallback(videoFrame);
-    cancelAnimationFrame(polling);
-  });
+    else if(state !== "entering" && !movie.ended){play(movie,useStatic);armWatchdog();}
+  }
+  function suspend() {
+    clearTimeout(typingTimer);clearTimeout(watchdog);
+    stopTracking();
+    if(fading && !staticMode){keepFrame();if(frameReady)canvas.hidden=false;}
+    flicker.style.visibility="hidden";movie.style.visibility="hidden";
+    flicker.pause();movie.pause();
+  }
+  document.addEventListener("visibilitychange",()=>{if(document.hidden)suspend();else resume();});
+  window.addEventListener("pagehide",()=>{suspend();clearTimeout(cursorTimer);});
   window.addEventListener("pageshow",event=>{
     if(!event.persisted)return;
-    if (typingStarted && typedCount < characters.length) typingTimer = setTimeout(typeNext,c.typingSpeed);
-    else if (typingStarted) cursor.hidden = true;
-    resize();
-    if(state==="idle")flicker.play().catch(()=>{});
-    else if(state==="entering"){
+    if(state === "entering"){
       state="welcome";document.body.dataset.introState=state;
       link.getAnimations().forEach(a=>a.cancel());layer.getAnimations().forEach(a=>a.cancel());
-    }else if(state==="zooming"||state==="transitioning"){
-      playing=false;startMovie();
-    }else if(!movie.ended){
-      movie.play().then(trackFrames).catch(()=>{retry.hidden=false;});
     }
+    resize();resume();
   });
   place(screenRect());
-  flicker.play().catch(()=>{retry.textContent="播放屏幕频闪";retry.hidden=false;});
+  play(flicker,autoRejected);
 })();

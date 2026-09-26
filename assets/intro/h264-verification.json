@@ -1,0 +1,58 @@
+[
+  {
+    "source": {
+      "file": "screen-flicker.mp4",
+      "codec": "hevc",
+      "pixel_format": "yuv420p",
+      "width": 1280,
+      "height": 720,
+      "average_rate": "13815000/461999",
+      "frames": 307,
+      "last_frame_time": 10.233222222222222,
+      "audio": [
+        "aac"
+      ]
+    },
+    "output": {
+      "file": "screen-flicker-h264.mp4",
+      "codec": "h264",
+      "pixel_format": "yuv420p",
+      "width": 1280,
+      "height": 720,
+      "average_rate": "4605/154",
+      "frames": 307,
+      "last_frame_time": 10.233222222222222,
+      "audio": []
+    },
+    "max_frame_timing_difference": 0.0
+  },
+  {
+    "source": {
+      "file": "new-intro-video.mp4",
+      "codec": "hevc",
+      "pixel_format": "yuv420p",
+      "width": 1920,
+      "height": 1080,
+      "average_rate": "383571403/12737142",
+      "frames": 179,
+      "last_frame_time": 5.933332995555533,
+      "audio": [
+        "aac"
+      ]
+    },
+    "output": {
+      "file": "new-intro-video-h264.mp4",
+      "codec": "h264",
+      "pixel_format": "yuv420p",
+      "width": 1920,
+      "height": 1080,
+      "average_rate": "767142806/25570887",
+      "frames": 179,
+      "last_frame_time": 5.933332995555533,
+      "audio": [
+        "aac"
+      ]
+    },
+    "max_frame_timing_difference": 0.0
+  }
+]
