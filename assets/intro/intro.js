@@ -33,6 +33,24 @@
   let autoplayAllowed = false, staticMode = false, watchdog, staticTimer;
   let moviePlaying = false, tracking = false, progressTime = -1;
   let moviePrimed = false, movieStarted = false;
+  const fallback = $("screen-fallback");
+  let flickerHasPlayed = false;
+  function recordFlickerError(error) {
+    const name = error?.name || "UnknownError";
+    document.body.dataset.flickerPlayError = name;
+    console.warn("Flicker autoplay failed:", name, error?.message || "", {
+      state, readyState: flicker.readyState, paused: flicker.paused,
+      hidden: document.hidden, currentTime: flicker.currentTime
+    });
+  }
+  function prepareFlicker() {
+    flicker.loop = true;
+    flicker.autoplay = true;
+    flicker.preload = "auto";
+    // Keep the video eligible for visible autoplay; the still image covers it until playing.
+    flicker.style.visibility = "visible";
+    flicker.style.opacity = "1";
+  }
   function prepare(video) {
     video.muted = true; video.defaultMuted = true; video.playsInline = true;
     video.controls = false; video.disablePictureInPicture = true;
@@ -42,19 +60,19 @@
   }
   function play(video, onFailure) {
     prepare(video);
+    if (video === flicker) prepareFlicker();
     try {
       const promise = video.play();
-      if (promise && typeof promise.then === "function") promise.then(() => {
-        if(video === flicker && state === "idle") {
-          autoplayAllowed = true;
-          document.body.dataset.autoplayAllowed = "true";
-        }
-      }).catch(error => {
+      if (promise && typeof promise.then === "function") promise.catch(error => {
+        if(video === flicker) recordFlickerError(error);
         // Pausing the initial gesture-authorized playback can abort its pending promise.
         if(video === movie && moviePrimed && !movieStarted && error.name === "AbortError")return;
         if(!document.hidden)onFailure(error);
       });
-    } catch(error) {onFailure(error);}
+    } catch(error) {
+      if(video === flicker) recordFlickerError(error);
+      if(!document.hidden)onFailure(error);
+    }
   }
   function stopTracking() {
     tracking = false;
@@ -79,18 +97,21 @@
     flicker.pause();movie.pause();
     flicker.style.opacity = movie.style.opacity = "0";
     flicker.style.visibility = movie.style.visibility = "hidden";
+    fallback.style.opacity = "1";
     if(frameReady)canvas.hidden=false;
     if(state === "transitioning")setState("introVideo");
     if(state === "introVideo")staticTimer=setTimeout(staticWelcome,c.typingStartTime*1000);
   }
   function autoRejected() {
+    // A late rejected attempt must not hide a subsequent successful playing event.
+    if(state !== "idle" || (flickerHasPlayed && !flicker.paused))return;
     autoplayAllowed = false;
     document.body.dataset.autoplayAllowed = "false";
-    if(state !== "idle")return;
-    flicker.style.opacity="0";flicker.style.visibility="hidden";
+    fallback.style.opacity = "1";
     document.body.dataset.playbackMode="gesture-fallback";
   }
   prepare(flicker);prepare(movie);
+  prepareFlicker();
   $("screen-fallback").src=c.screenFallback;
   flicker.poster=movie.poster=c.screenFallback;
   flicker.src = c.flickerVideo;
@@ -221,11 +242,29 @@
   screen.addEventListener("click",begin);
   flicker.addEventListener("playing",()=>{
     if(staticMode || fading || !["idle","zooming","transitioning"].includes(state))return;
+    flickerHasPlayed = true;
+    fallback.style.opacity = "0";
+    document.body.dataset.flickerStatus = "playing";
     if(state === "idle"){autoplayAllowed=true;document.body.dataset.autoplayAllowed="true";}
     flicker.style.visibility="visible";flicker.style.opacity="1";
     document.body.dataset.playbackMode=state === "idle" ? "autoplay" : (autoplayAllowed ? "autoplay" : "user-gesture");
   });
+  // Bounded readiness retries, never canplaythrough and never a polling loop.
+  for (const eventName of ["loadedmetadata", "loadeddata", "canplay"]) {
+    flicker.addEventListener(eventName, () => {
+      if(state === "idle" && !document.hidden && flicker.paused) play(flicker, autoRejected);
+    }, {once:true});
+  }
+  flicker.addEventListener("timeupdate", () => {
+    document.body.dataset.flickerCurrentTime = flicker.currentTime.toFixed(3);
+  });
+  flicker.addEventListener("pause", () => {
+    document.body.dataset.flickerStatus = "paused";
+    if(state === "idle") fallback.style.opacity = "1";
+  });
   flicker.addEventListener("error",()=>{
+    document.body.dataset.flickerMediaError = String(flicker.error?.code || "unknown");
+    fallback.style.opacity = "1";
     flicker.style.visibility="hidden";flicker.style.opacity="0";
     if(state === "idle")document.body.dataset.playbackMode="gesture-fallback";
   });

@@ -1,0 +1,60 @@
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;min-height:100%;background:#101216;color:#dbe5eb}
+body{font:13px Tahoma,"SimSun",serif;overflow-x:hidden}
+@font-face{font-family:Weddingday;src:url("../../fonts/WeddingdayPersonalUseRegular-1Gvo0.ttf") format("truetype");font-display:swap}
+.route-header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px}
+.route-header h1{margin:0;font:24px/1.4 Weddingday,Georgia,serif;font-weight:400}
+.route-back{color:#c0cedb;text-decoration:none;font-size:12px;padding:10px 0}
+.route-back:hover{text-decoration:underline}
+.crt-stage{display:grid;place-items:center;min-height:calc(100svh - 82px);overflow:hidden;padding-bottom:16px}
+.crt-computer{position:relative;width:min(1100px,96vw,calc((100svh - 100px)*1406/1280));aspect-ratio:1406/1280}
+.crt-image{display:block;width:100%;height:100%;object-fit:contain;user-select:none;pointer-events:none}
+.crt-screen{position:absolute;left:8.3%;top:20.3%;width:83.1%;height:51.3%;overflow:hidden;isolation:isolate;container-type:inline-size;border-radius:1%;color:#142738}
+.map-desktop-icon{position:absolute;left:22%;top:6%;display:flex;flex-direction:column;align-items:center;gap:3px;width:54px;padding:3px;border:1px solid transparent;background:none;cursor:pointer;color:white;font:12px Tahoma,sans-serif}
+.map-desktop-icon svg{width:36px;height:32px;filter:drop-shadow(1px 2px 1px #00182966)}
+.map-desktop-icon span{background:#102937a6;padding:2px 5px}
+.map-desktop-icon:hover,.map-desktop-icon:focus-visible{border:1px dotted #fff;background:#c2dbfb26}
+.retro-window{position:absolute;z-index:2;padding:3px;background:#c6c9cc;border:1px solid #f6f8f8;box-shadow:inset -1px -1px #4a5058,inset 1px 1px #fff,2px 3px 0 #001a3540;animation:crt-window-open 140ms steps(3,end)}
+.retro-title{display:flex;justify-content:space-between;align-items:center;gap:4px;min-height:25px;background:linear-gradient(90deg,#102f6b,#325d8e);color:white;padding:3px 4px 3px 7px;font:11px Tahoma,sans-serif}
+.retro-title strong{overflow:hidden;white-space:nowrap}
+.retro-controls{display:flex;gap:2px}
+.retro-title button,.retro-button{color:#172b3d;background:#cbd0d4;border:1px solid;border-color:#fff #525a65 #525a65 #fff;box-shadow:inset -1px -1px #9ca7af;font:12px Tahoma,sans-serif;border-radius:0;cursor:pointer}
+.retro-title button{width:22px;height:20px;padding:0;line-height:17px}
+.retro-title button:active,.retro-button:active{border-color:#525a65 #fff #fff #525a65;box-shadow:none}
+.route-prompt{left:50%;top:50%;transform:translate(-50%,-50%);width:min(250px,85%);animation-name:crt-prompt-open}
+.prompt-content{text-align:center;padding:12px 10px}
+.prompt-content p{font-size:12px;margin:4px 0 16px}
+.retro-button{min-width:68px;min-height:28px;padding:4px 14px}
+.route-window{left:16%;top:12%;width:78%;height:78%;display:flex;flex-direction:column}
+.route-window.is-maximized{left:2%;top:3%;width:96%;height:94%}
+.route-program{flex:1;min-height:0;margin:5px;background:#e9edeb;border:1px solid;border-color:#818992 #fff #fff #818992;padding:10px 14px;overflow:auto}
+.program-file{font:10px "Courier New",monospace;letter-spacing:.1em;color:#536676;margin-bottom:9px}
+.crt-route-links{position:relative;display:grid;gap:2px}
+.crt-route-links::before{content:"";position:absolute;left:8px;top:22px;bottom:22px;width:1px;background:#6f7e87}
+.crt-route-links a{position:relative;display:flex;align-items:center;gap:12px;min-height:44px;padding:3px 0;color:#243c51;font-size:clamp(12px,2.2cqw,16px);text-decoration:none}
+.crt-route-links a span{position:relative;display:grid;place-items:center;background:#e9edeb;width:17px;flex-shrink:0;font:15px Tahoma}
+.crt-route-links a:hover{color:#12366a;text-decoration:underline;text-underline-offset:3px}
+.program-status{display:flex;justify-content:space-between;gap:8px;border:1px solid;border-color:#8d969e #fff #fff #8d969e;padding:4px 5px;font:8px "Courier New",monospace;white-space:nowrap;color:#435461}
+.crt-scanlines{position:absolute;inset:0;z-index:4;pointer-events:none;background:repeating-linear-gradient(0deg,#0621490c 0 1px,transparent 1px 4px);box-shadow:inset 0 0 16px #7dbbfc12}
+a:focus-visible,button:focus-visible{outline:1px dotted currentColor;outline-offset:2px}
+@keyframes crt-window-open{from{opacity:0;scale:.95}to{opacity:1;scale:1}}
+@keyframes crt-prompt-open{from{opacity:0;scale:.95}to{opacity:1;scale:1}}
+@media(max-width:600px){
+.route-header{padding:18px 20px}
+.crt-stage{min-height:calc(100svh - 82px);align-content:center}
+.crt-computer{width:116vw;max-width:none}
+.map-desktop-icon{left:23%;top:4%;width:48px;font-size:10px;gap:1px}
+.map-desktop-icon svg{width:28px;height:26px}
+.route-window,.route-window.is-maximized{left:3%;top:3%;width:94%;height:94%}
+.retro-title{min-height:24px;font-size:10px}.retro-title button{width:24px;height:21px}
+.route-program{margin:3px;padding:3px 7px}
+.program-file{font-size:9px;margin-bottom:1px}
+.crt-route-links{gap:0}
+.crt-route-links a{min-height:44px;gap:7px;font-size:13px}
+.program-status{font-size:8px;padding:3px}
+.program-status span{display:none}
+}
+@media(prefers-reduced-motion:reduce){.retro-window{animation:none}}
+@media(prefers-reduced-motion:no-preference){.crt-scanlines{animation:crt-soft-scan 9s linear infinite}}
+@keyframes crt-soft-scan{0%,87%,92%,100%{opacity:.82}89%,94%{opacity:1}}

@@ -8,9 +8,23 @@
 *{box-sizing:border-box}body{margin:0;min-height:100dvh;background:#eef3f7;color:#294461;font:13px Tahoma,"Microsoft YaHei",sans-serif}header{padding:20px;padding-top:max(20px,env(safe-area-inset-top));padding-left:max(20px,env(safe-area-inset-left))}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible{outline:1px dotted #294461;outline-offset:4px}
 </style>
 <script defer src="assets/chat/return-to-chat.js"></script>
+<link rel="stylesheet" href="assets/log/log-intro.css">
+<script defer src="assets/log/config.js"></script>
+<script defer src="assets/log/log-intro.js"></script>
 </head>
 <body>
+<section class="log-intro" id="log-intro" data-state="prompt" aria-label="日志开场">
+<video class="memory-video" id="memory-video" playsinline preload="none" disablepictureinpicture disableremoteplayback aria-label="日志开场视频"></video>
+<div class="memory-prompt" id="memory-prompt">
+<h1>PLAY THE MEMORY?</h1>
+<p>这段开场包含声音<br>建议佩戴耳机</p>
+<div class="memory-actions"><button type="button" id="memory-play">▶ 播放开场</button><button type="button" id="memory-skip-prompt">跳过 →</button></div>
+<p class="memory-error" id="memory-error" role="status" hidden>视频暂时无法播放，请重试或选择跳过。</p>
+</div>
+<button class="memory-skip" id="memory-skip" type="button">SKIP →</button>
+</section>
+<div id="log-content" hidden inert>
 <header><a href="home.html" data-chat-return>← 返回</a></header>
 <main id="left-log"></main>
-</body>
+</div><noscript><a href="home.html" data-chat-return>← 返回</a></noscript></body>
 </html>

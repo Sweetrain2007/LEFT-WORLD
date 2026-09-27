@@ -1,0 +1,1 @@
+window.LEFT_LOG_INTRO = Object.freeze({video: "assets/log/log-intro-h264.mp4", fadeDuration: 450});

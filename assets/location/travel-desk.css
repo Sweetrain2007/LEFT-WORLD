@@ -1,0 +1,39 @@
+/* Scene composition only: the map artwork, destinations and folding state are unchanged. */
+.journey-screen{display:block;min-height:100svh;isolation:isolate}
+.location-caption{position:absolute;top:79px;left:24px;color:#dfeaf4;max-width:calc(100% - 100px);text-shadow:0 1px 2px #213a5266}
+.location-caption p{font:10px/1.7 "Courier New",monospace;letter-spacing:.2em;margin:0 0 8px}
+.location-caption span{font:italic 11px/1.8 Georgia,serif;letter-spacing:.035em}
+.journey-screen .fold-map-stage{display:block;position:relative;margin-top:clamp(135px,23svh,240px);padding:46px 0 90px;perspective:none;overflow:hidden;overflow:clip;min-height:calc(70svh - 46px)}
+.desk-surface{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,#ccd7df 0,#a6b9c9 3%,#abbac5 60%,#869caf 100%);border-top:1px solid #e2eaf0;box-shadow:0 -8px 28px #213b5526;animation:desk-arrive 700ms ease-out both}
+.desk-surface::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,#536b8006 3px 4px),linear-gradient(110deg,#ffffff1c,transparent 40%,#253d5312);pointer-events:none}
+.desk-surface::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(#a9bac7,#6e8498 18%,#71889d);border-top:1px solid #e2e9ee66}
+.desk-objects{position:relative;z-index:1;width:min(1440px,100%);margin:0 auto;perspective:1800px}
+.desk-objects .fold-map{--map-width:min(960px,68vw);--map-height:clamp(330px,34vw,490px);margin:0 auto;transform:rotateX(9deg) rotateZ(-1.2deg);transform-origin:center center;z-index:2}
+.travel-ticket{position:absolute;width:clamp(160px,18vw,250px);min-height:115px;background:#f2f1e9;border:1px solid #e4e5de;box-shadow:1px 5px 10px #263e532e;color:#455769;pointer-events:none;animation:ticket-arrive 850ms ease-out both}
+.ticket-print{position:relative;padding:13px 15px;min-height:115px;overflow:hidden;background:repeating-linear-gradient(110deg,#56616b05 0 1px,transparent 1px 4px),linear-gradient(120deg,#fff6,#e2e4df33)}
+.ticket-heading{display:block;font:9px/1.4 "Courier New",monospace;letter-spacing:.15em;border-bottom:1px solid #88969e66;padding-bottom:6px}
+.ticket-print strong{display:block;margin:12px 0 8px;font:12px/1.5 "SimSun",serif;letter-spacing:.06em}
+.ticket-rule{display:block;width:100%;height:1px;background:#8998a033}
+.ticket-caption{display:block;font:8px/1.8 "Courier New",monospace;letter-spacing:.09em;margin-top:7px}
+.ticket-line{display:block;height:2px;width:75%;background:#84939d44;margin:15px 0}.ticket-line.short{width:45%}
+.ticket-perforation{position:absolute;right:13px;top:0;height:100%;border-left:1px dashed #8998a066}
+.rail-ticket-under{left:-2%;top:41%;transform:rotate(-14deg);background:#dce7ec;z-index:0}
+.rail-ticket{left:0%;top:29%;transform:rotate(-8deg);z-index:1}
+.air-ticket{right:-1%;top:48%;transform:rotate(9deg);z-index:1}
+.air-ticket .ticket-heading{background:#536d86;color:#f1f5f7;margin:-13px -15px 0;padding:9px 15px;font-size:10px}
+.air-ticket strong{font:19px/1.5 "Courier New",monospace;letter-spacing:.12em}.air-ticket small{font-size:13px}
+.travel-ticket.has-image{background:none;border:0;box-shadow:none;min-height:0;filter:drop-shadow(1px 5px 5px #263e5333)}
+.travel-ticket.has-image .ticket-print{display:none}
+.ticket-image{display:block;width:100%;height:auto}
+@keyframes desk-arrive{from{opacity:0}to{opacity:1}}
+@keyframes ticket-arrive{from{opacity:0}to{opacity:1}}
+@media(max-width:600px){
+.location-caption{left:24px;top:77px}.location-caption p{font-size:9px}.location-caption span{display:block;max-width:235px;font-size:10px}
+.journey-screen .fold-map-stage{margin-top:clamp(138px,23svh,215px);padding:56px 0 86px}
+.desk-objects .fold-map{--map-width:calc(100vw - 44px);--map-height:clamp(320px,47svh,420px);transform:rotateX(5deg) rotateZ(-1deg)}
+.travel-ticket{width:154px;min-height:102px}
+.rail-ticket{left:-118px;top:10%;transform:rotate(-10deg)}
+.rail-ticket-under{left:-108px;top:18%;transform:rotate(-17deg)}
+.air-ticket{right:-123px;top:62%;transform:rotate(10deg)}
+}
+@media(prefers-reduced-motion:reduce){.desk-surface,.travel-ticket{animation:none}}
