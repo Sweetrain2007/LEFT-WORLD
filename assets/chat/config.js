@@ -1,4 +1,9 @@
 window.LEFT_CHAT_CONFIG = Object.freeze({
+  leftProfile: Object.freeze({
+    name: "LEFT",
+    weiboUrl: "https://weibo.com/u/6656507054",
+    logUrl: "left-log.html"
+  }),
   leftAvatar: "assets/left/left-avatar.jpg",
   firstMessageDelay: 1000,
   shareMessageDelay: 650,

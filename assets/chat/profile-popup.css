@@ -1,0 +1,21 @@
+.left-profile-popup{position:fixed;z-index:1000;width:216px;box-sizing:border-box;overflow:auto;border:1px solid #54779e;padding:2px;background:#e9eff5;color:#294461;box-shadow:inset 1px 1px #fff,2px 2px 0 #284a6a26;font:12px Tahoma,"SimSun",serif;animation:left-profile-appear 160ms ease-out}
+.left-profile-popup[hidden]{display:none!important}
+.left-profile-titlebar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:25px;padding:3px 4px 3px 7px;background:linear-gradient(#598ac5,#33629b);color:#fff}
+.left-profile-titlebar strong{font-size:12px}
+.left-profile-close{width:20px;height:19px;line-height:15px;padding:0;border:1px solid #285181;background:#dce8f4;color:#244461;box-shadow:inset 1px 1px white,inset -1px -1px #9db1c8;font:16px Tahoma;cursor:pointer}
+.left-profile-body{padding:12px}
+.left-profile-identity{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.left-profile-image{display:block;object-fit:cover;border:1px solid #8da4bf;padding:2px;background:white}
+.left-profile-name{font-size:12px}
+.left-profile-online{display:block;font-size:11px;margin-top:7px;color:#516f69}
+.left-profile-online i{display:inline-block;width:6px;height:6px;border:1px solid #44734a;background:#83ab79}
+.left-profile-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.left-profile-actions button,.left-profile-actions a{display:block;box-sizing:border-box;text-align:center;margin:0;padding:6px 4px;border:1px solid #8b9eaf;background:#edf0f3;box-shadow:inset 1px 1px #fff,inset -1px -1px #b8c5d1;color:#294461;font:12px "SimSun",serif;text-decoration:none;cursor:pointer;border-radius:0}
+.left-profile-actions :hover{background:#dae7f5}
+.left-profile-actions :active{box-shadow:inset 1px 1px #a4b5c5}
+.left-profile-actions :disabled{color:#84909b;cursor:default}
+.left-profile-popup :focus-visible{outline:1px dotted #173d65;outline-offset:2px}
+.message-profile-trigger{display:block;flex-shrink:0;margin:0;padding:0;border:0;background:transparent;cursor:pointer;line-height:0}
+#profile-avatar,#mobile-profile-avatar,#left-contact .avatar-frame{cursor:pointer}
+@keyframes left-profile-appear{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.left-profile-popup{animation:none}}

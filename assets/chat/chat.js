@@ -79,7 +79,12 @@
       link.append(heading, element("span", "share-message-label", share.text), element("span", "share-message-arrow", ">"));
       content.append(link);
     }
-    row.append(image, content);
+    const avatarButton = element("button", "message-profile-trigger");
+    avatarButton.type = "button";
+    avatarButton.dataset.profileTrigger = "left";
+    avatarButton.setAttribute("aria-label", "打开 LEFT 个人资料");
+    avatarButton.append(image);
+    row.append(avatarButton, content);
     list.append(row);
     list.scrollTop = list.scrollHeight;
   }
@@ -136,8 +141,8 @@
     else firstTimer = setTimeout(receiveIntro, config.firstMessageDelay);
   }
   contact.addEventListener("click", selectContact);
-  ["profile-avatar", "mobile-profile-avatar"].forEach(id => document.getElementById(id).addEventListener("click", () => {
-    document.dispatchEvent(new CustomEvent("left:open-profile", {detail: {contactId: "left", source: "avatar"}}));
+  ["profile-avatar", "mobile-profile-avatar"].forEach(id => document.getElementById(id).addEventListener("click", event => {
+    document.dispatchEvent(new CustomEvent("left:open-profile", {detail: {contactId: "left", source: "avatar", anchor: event.currentTarget}}));
   }));
   ["chat-input", "mobile-chat-input"].forEach(id =>
     document.getElementById(id).addEventListener("submit", event => event.preventDefault()));
