@@ -173,7 +173,10 @@ html{scroll-behavior:smooth}
 @keyframes earphones-appear{from{opacity:0}to{opacity:1}}
 @media(max-width:360px){.player-assembly{width:calc(100vw - 80px)}}
 @media(prefers-reduced-motion:reduce){.player-earphones{animation:none!important;transition:none!important;transform:none!important;opacity:1!important}}
-</style></head><body><div class="rain" aria-hidden="true">
+</style>
+<link rel="stylesheet" href="assets/location/fold-map.css">
+<script defer src="assets/location/fold-map.js"></script>
+</head><body><div class="rain" aria-hidden="true">
   <span class="rain-drop" style="--x:0.00%;--length:10px;--alpha:0.25;--speed:2.5s;--delay:-0.00s"></span>
   <span class="rain-drop" style="--x:61.80%;--length:17px;--alpha:0.38;--speed:4.2s;--delay:-0.73s"></span>
   <span class="rain-drop" style="--x:23.61%;--length:14px;--alpha:0.31;--speed:3.9s;--delay:-1.46s"></span>
@@ -216,12 +219,30 @@ html{scroll-behavior:smooth}
 <section id="route-screen" class="journey-screen" aria-label="成长路线">
 <a class="route-back" href="home.html" data-chat-return aria-label="返回聊天主页" title="返回聊天主页"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
 <h1 class="site-brand">LEFT's World</h1>
-<section class="journey" aria-labelledby="journey-title">
-  <div class="journey-heading"><p>THE JOURNEY</p><h2 id="journey-title">一路走来</h2><small>点击地点，走进每一段故事</small></div>
-  <nav class="route-track" aria-label="成长路线">
-    <svg class="route-line" viewBox="0 0 900 120" preserveAspectRatio="none" aria-hidden="true"><path d="M150 55 C250 10 345 115 450 85 S645 5 750 40"/></svg>
-    <ol class="route-stops"><li><a class="route-stop" href="qijiang.html"><span class="route-dot" aria-hidden="true"></span><span class="route-label"><span class="route-number">01</span>重庆綦江</span></a></li><li><a class="route-stop" href="changjiang.html"><span class="route-dot" aria-hidden="true"></span><span class="route-label"><span class="route-number">02</span>重庆南岸·长江国际</span></a></li><li><a class="route-stop" href="beijing.html"><span class="route-dot" aria-hidden="true"></span><span class="route-label"><span class="route-number">03</span>北京</span></a></li></ol>
+<section class="fold-map-stage" aria-label="LEFT 的折叠地图">
+<div class="fold-map" data-map-state="folded">
+  <div class="map-stack" aria-hidden="true">
+    <div class="map-panel map-panel-one">
+      <div class="map-face map-front"></div><div class="map-face map-back"></div>
+      <div class="map-panel map-panel-two">
+        <div class="map-face map-front"></div><div class="map-face map-back"></div>
+        <div class="map-panel map-panel-three">
+          <div class="map-face map-front"></div><div class="map-face map-back"></div>
+          <div class="map-panel map-panel-four">
+            <div class="map-face map-front"></div>
+            <div class="map-face map-back"><span class="map-cover-title">LEFT'S MAP</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="map-open-button" type="button" aria-label="展开 LEFT 的地图" aria-expanded="false" aria-controls="map-places"></button>
+  <nav class="map-places" id="map-places" aria-label="地图地点" aria-hidden="true" inert>
+    <a class="map-place map-place-qijiang" href="qijiang.html">重庆綦江</a>
+    <a class="map-place map-place-changjiang" href="changjiang.html"><span>重庆南岸</span><small>· 长江国际</small></a>
+    <a class="map-place map-place-beijing" href="beijing.html">北京</a>
   </nav>
+</div>
 </section>
 
 </section>

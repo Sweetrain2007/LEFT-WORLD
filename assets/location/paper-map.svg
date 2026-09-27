@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" preserveAspectRatio="none">
+<defs>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+ <pattern id="grid" width="50" height="40" patternUnits="userSpaceOnUse"><path d="M50 0H0V40" fill="none" stroke="#6b747b" stroke-opacity=".12" stroke-width=".7"/></pattern>
+</defs>
+<path fill="#f7f6f1" d="M0 0H1000V560H0z"/>
+<path fill="url(#grid)" d="M0 0H1000V560H0z"/>
+<g fill="none" stroke="#91938c" stroke-width="1" opacity=".26">
+<path d="M-20 95Q120 5 248 125T500 170T750 65T1040 140M-20 109Q120 20 248 141T500 187T750 82T1040 156M-20 123Q120 35 248 157T500 205T750 98T1040 174"/>
+<path d="M-10 360Q170 250 300 388T580 425T790 342T1020 465M-10 377Q170 267 300 405T580 442T790 359T1020 482M-10 395Q170 284 300 422T580 459T790 376T1020 499"/>
+<path d="M95 0L130 175 86 238 200 310 272 560M415 0L396 125 453 258 382 560M890 0L901 159 827 254 880 560"/>
+</g>
+<g fill="none" stroke="#dedfd8" stroke-width="5" opacity=".55"><path d="M-20 270L164 204 351 310 537 213 724 298 1010 165"/><path d="M233 -20L310 157 279 292 590 575"/></g>
+<g fill="none" stroke="#7d858b" stroke-width="1" opacity=".3"><path d="M-20 270L164 204 351 310 537 213 724 298 1010 165"/><path d="M233 -20L310 157 279 292 590 575"/></g>
+<g fill="none" stroke="#343e47" stroke-width="1.8" stroke-linejoin="round">
+ <path d="M185 405L269 375 320 324 470 282 549 261 586 195 689 199 810 140"/>
+ <path d="M185 405L146 440M470 282L477 340M810 140L851 97" stroke-width=".8"/>
+</g>
+<g fill="#f7f6f1" stroke="#343e47" stroke-width="2"><circle cx="185" cy="405" r="5"/><rect x="465" y="277" width="10" height="10"/><circle cx="810" cy="140" r="5"/></g>
+<g fill="#535f68" font-family="monospace" font-size="10" letter-spacing="3"><text x="30" y="35">LEFT'S MAP</text><text x="800" y="529">PLACES / MEMORIES</text></g>
+<g stroke="#667078" stroke-width="1" fill="none"><path d="M900 60V100M880 80H920M897 65L900 60 903 65"/><path d="M40 515V521H140V515M90 515V521"/></g>
+<text x="896" y="53" font-size="10" fill="#667078" font-family="serif">N</text>
+<path d="M0 0H1000V560H0z" filter="url(#grain)" opacity=".075"/>
+</svg>

@@ -1,0 +1,46 @@
+/* All rules are scoped to this standalone Location page. */
+body{overflow-x:hidden;background-image:linear-gradient(rgba(25,53,94,.24),rgba(17,43,83,.34)),url("../../images/home-background.jpg")}
+.journey-screen .fold-map-stage{position:relative;align-self:center;justify-self:center;width:100%;min-width:0;display:grid;place-items:center;padding:40px 0 76px;perspective:1800px;overflow:hidden;overflow:clip}
+.fold-map{--map-width:min(1060px,calc(100vw - 40px));--map-height:510px;position:relative;width:var(--map-width);height:var(--map-height);color:#343e47;perspective:1800px}
+.map-stack{position:absolute;left:0;top:0;width:25%;height:100%;transform-style:preserve-3d;transform:translateX(150%);transition:transform 1500ms cubic-bezier(.4,0,.2,1)}
+.map-panel{position:absolute;top:0;left:100%;width:100%;height:100%;transform-style:preserve-3d;transform-origin:left center;transition:transform 600ms cubic-bezier(.4,0,.2,1)}
+.map-panel-one{left:0;transform:none}
+.map-panel-two{transform:translateZ(1px) rotateY(-179.7deg);transition-delay:0ms}
+.map-panel-three{transform:translateZ(-1px) rotateY(179.7deg);transition-delay:450ms}
+.map-panel-four{transform:translateZ(1px) rotateY(-179.7deg);transition-delay:900ms}
+.map-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-top:1px solid #fffffc;border-bottom:1px solid #a6aaa9;background-color:#f7f6f1;box-shadow:0 13px 20px -12px #13233d66,inset 0 1px #ffffff}
+.map-face::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 48.7%,#62697212 49.7%,#ffffffb3 50.15%,transparent 51.2%);z-index:1}
+.map-front{background-image:url("paper-map.svg");background-size:400% 100%;background-position:var(--slice) 0}
+.map-panel-one>.map-front{--slice:0%}
+.map-panel-two>.map-front{--slice:33.333333%}
+.map-panel-three>.map-front{--slice:66.666667%}
+.map-panel-four>.map-front{--slice:100%}
+.map-front::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fff5 0,transparent 4%,#6268700a 70%,#41495130 100%);pointer-events:none}
+.map-panel-two>.map-front::after,.map-panel-four>.map-front::after{background:linear-gradient(90deg,#444c5633,transparent 7%,#ffffff0d 65%,#ffffff50)}
+.map-back{transform:rotateY(180deg);background-image:linear-gradient(90deg,#4e556333,transparent 8%,#ffffff55 92%,#ffffffcc),url("paper-map.svg");background-size:100% 100%,1100% 180%;border-left:1px solid #b5b8b7;border-right:1px solid #fffffc;display:flex;align-items:center;justify-content:center}
+.map-cover-title{font:clamp(15px,2.8vw,28px)/1.8 Georgia,serif;letter-spacing:.12em;writing-mode:vertical-rl;border:1px solid #56616b66;padding:22px 9px;color:#3f4c57}
+.map-open-button{position:absolute;z-index:10;top:0;left:37.5%;width:25%;height:100%;border:0;background:transparent;cursor:pointer;color:inherit}
+.map-open-button:focus-visible{outline:2px solid #425970;outline-offset:7px}
+.map-open-button[hidden]{display:none}
+.fold-map[data-map-state="unfolding"] .map-stack,.fold-map[data-map-state="open"] .map-stack{transform:translateX(0)}
+.fold-map[data-map-state="unfolding"] .map-panel:not(.map-panel-one),.fold-map[data-map-state="open"] .map-panel:not(.map-panel-one){transform:translateZ(0) rotateY(0deg)}
+.map-places{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 180ms ease}
+.fold-map[data-map-state="open"] .map-places{visibility:visible;opacity:1;pointer-events:auto}
+.map-place{position:absolute;display:flex;align-items:center;min-height:44px;padding:6px 9px;color:#343e47;text-decoration:none;font:14px/1.65 "SimSun","Songti SC",serif;text-shadow:0 1px #ffffff80}
+.map-place:hover{text-decoration:underline;text-underline-offset:4px}
+.map-place:focus-visible{outline:1px dashed #425970;outline-offset:1px}
+.map-place-qijiang{left:10%;top:76%}
+.map-place-changjiang{left:40%;top:59%;flex-direction:column;align-items:flex-start;justify-content:center}
+.map-place-beijing{left:80%;top:11%}
+.map-place small{font:inherit}
+.fold-map.map-restored *{transition:none!important}
+@media(max-width:600px){
+.journey-screen .fold-map-stage{padding:28px 0 64px}
+.fold-map{--map-width:calc(100vw - 20px);--map-height:min(520px,70svh)}
+.map-place{font-size:13px;padding:5px;min-height:44px}
+.map-place-qijiang{left:4%;top:76%}
+.map-place-changjiang{left:37%;top:57%}
+.map-place-beijing{left:76%;top:9%}
+.map-cover-title{font-size:17px;letter-spacing:.09em;padding:18px 7px}
+}
+@media(prefers-reduced-motion:reduce){.map-stack,.map-panel,.map-places{transition:none!important}}
