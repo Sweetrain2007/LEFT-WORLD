@@ -74,6 +74,16 @@
       if(!document.hidden)onFailure(error);
     }
   }
+  // Retry only while the initial computer is idle and visibly laid out.
+  // Lifecycle events provide bounded retries; never restart the second movie here.
+  function retryIdleFlicker(reason) {
+    if(state !== "idle" || document.hidden || staticMode || !flicker.paused || flicker.error)return;
+    const rect = screenRect();
+    if(rect.width <= 0 || rect.height <= 0)return;
+    place(rect);
+    document.body.dataset.flickerPlayTrigger = reason;
+    play(flicker,autoRejected);
+  }
   function stopTracking() {
     tracking = false;
     if(videoFrame != null && movie.cancelVideoFrameCallback)movie.cancelVideoFrameCallback(videoFrame);
@@ -348,7 +358,7 @@
   document.addEventListener("visibilitychange",()=>{if(document.hidden)suspend();else resume();});
   window.addEventListener("pagehide",()=>{suspend();clearTimeout(cursorTimer);});
   window.addEventListener("pageshow",event=>{
-    if(!event.persisted)return;
+    if(!event.persisted){retryIdleFlicker("pageshow");return;}
     if(state === "entering"){
       state="welcome";document.body.dataset.introState=state;
       link.getAnimations().forEach(a=>a.cancel());layer.getAnimations().forEach(a=>a.cancel());
@@ -356,5 +366,7 @@
     resize();resume();
   });
   place(screenRect());
+  document.body.dataset.flickerPlayTrigger = "initial";
   play(flicker,autoRejected);
+  requestAnimationFrame(() => retryIdleFlicker("layout-ready"));
 })();
