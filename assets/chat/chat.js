@@ -7,6 +7,57 @@
   const lists = [...document.querySelectorAll(".message-list")];
   const mobileContact = document.getElementById("mobile-contact");
   const buttons = [...document.querySelectorAll("[data-share]")];
+  const voiceButtons = [...document.querySelectorAll("[data-voice-request]")];
+  const voiceLibrary = typeof leftVoiceLibrary === "undefined" ? [] : leftVoiceLibrary;
+  const voiceAudio = new Audio();
+  voiceAudio.preload = "metadata";
+  let activeVoiceId = null, lastVoiceId = null, voiceSequence = 0, playbackToken = 0;
+  function syncVoicePlayback() {
+    document.querySelectorAll(".voice-message").forEach(button => {
+      const playing = button.dataset.voiceId === activeVoiceId && !voiceAudio.paused && !voiceAudio.ended;
+      button.setAttribute("aria-pressed", String(playing));
+      button.setAttribute("aria-label", playing ? "暂停 LEFT 语音" : "播放 LEFT 语音");
+    });
+  }
+  function stopVoice() {
+    playbackToken++;
+    voiceAudio.pause();
+    voiceAudio.removeAttribute("src");
+    voiceAudio.load();
+    activeVoiceId = null;
+    syncVoicePlayback();
+  }
+  function toggleVoice(message) {
+    if (activeVoiceId === message.id && !voiceAudio.paused) {
+      playbackToken++; voiceAudio.pause(); return;
+    }
+    voiceAudio.pause();
+    if (activeVoiceId !== message.id) {
+      activeVoiceId = message.id; voiceAudio.src = message.src;
+    }
+    if (voiceAudio.ended) voiceAudio.currentTime = 0;
+    const attempt = ++playbackToken;
+    voiceAudio.play().catch(() => { if (attempt === playbackToken) syncVoicePlayback(); });
+    syncVoicePlayback();
+  }
+  ["play", "pause", "ended", "error"].forEach(event => voiceAudio.addEventListener(event, syncVoicePlayback));
+  const durations = new Map();
+  function showDuration(src, duration) {
+    if (!Number.isFinite(duration) || duration <= 0) return;
+    durations.set(src, duration);
+    document.querySelectorAll(".voice-message").forEach(button => {
+      if (button.dataset.voiceSrc === src) button.querySelector(".voice-duration").textContent = Math.ceil(duration) + '″';
+    });
+  }
+  const metadataAudio = new Map();
+  function loadVoiceDuration(message) {
+    if (durations.has(message.src)) { showDuration(message.src, durations.get(message.src)); return; }
+    if (Number.isFinite(message.duration) && message.duration > 0) { showDuration(message.src, message.duration); return; }
+    if (metadataAudio.has(message.src)) return;
+    const probe = new Audio(); metadataAudio.set(message.src, probe); probe.preload = "metadata";
+    probe.addEventListener("loadedmetadata", () => showDuration(message.src, probe.duration), {once:true});
+    probe.src = message.src;
+  }
   const records = new Map();
   const pending = new Map();
   let firstTimer, noticeTimer, scheduled = false;
@@ -64,6 +115,18 @@
     content.append(sender);
     if (message.type === "text") {
       content.append(element("p", "message-text", message.text));
+    } else if (message.type === "voice") {
+      const bubble = element("button", "voice-message");
+      bubble.type = "button";
+      bubble.dataset.voiceId = message.id;
+      bubble.dataset.voiceSrc = message.src;
+      bubble.setAttribute("aria-label", "播放 LEFT 语音");
+      bubble.setAttribute("aria-pressed", "false");
+      const waves = element("span", "voice-waves", ")))");
+      waves.setAttribute("aria-hidden", "true");
+      bubble.append(waves, element("span", "voice-duration", "语音"));
+      bubble.addEventListener("click", () => toggleVoice(message));
+      content.append(bubble);
     } else {
       const share = config.shares[message.type];
       const link = element("a", "share-message");
@@ -86,6 +149,7 @@
     avatarButton.append(image);
     row.append(avatarButton, content);
     list.append(row);
+    if (message.type === "voice") loadVoiceDuration(message);
     list.scrollTop = list.scrollHeight;
   }
   function receiveIntro() {
@@ -112,7 +176,27 @@
       });
     }, config.shareMessageDelay));
   }
+  function requestVoice() {
+    if (pending.has("voice") || !voiceLibrary.length) return;
+    const eligible = voiceLibrary.filter(item => typeof item.src === "string" && item.src.trim());
+    if (!eligible.length) return;
+    const different = eligible.filter(item => item.id !== lastVoiceId);
+    const pool = different.length ? different : eligible;
+    voiceButtons.forEach(button => { button.disabled = true; button.setAttribute("aria-busy", "true"); });
+    pending.set("voice", setTimeout(() => {
+      pending.delete("voice");
+      const chosen = pool[Math.floor(Math.random() * pool.length)];
+      lastVoiceId = chosen.id;
+      clearTimeout(firstTimer);
+      appendMessage(intro);
+      appendMessage({id: "voice-" + (++voiceSequence), sender:"left", type:"voice", src:chosen.src, duration:chosen.duration});
+      voiceButtons.forEach(button => { button.disabled = false; button.removeAttribute("aria-busy"); });
+    }, 500 + Math.floor(Math.random() * 701)));
+  }
+  voiceButtons.forEach(button => button.addEventListener("click", requestVoice));
   function restoreBase() {
+    stopVoice();
+    voiceButtons.forEach(button => { button.disabled = false; button.removeAttribute("aria-busy"); });
     clearTimeout(firstTimer);
     pending.forEach(timer => clearTimeout(timer));
     pending.clear();

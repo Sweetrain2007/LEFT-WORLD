@@ -167,7 +167,7 @@ html{scroll-behavior:smooth}
 .icons-screen{padding-top:290px;padding-bottom:210px}
 .player-assembly{position:relative;isolation:isolate;width:min(320px,calc(100vw - 96px));aspect-ratio:320/540}
 .player-assembly .player-shell{width:100%;z-index:1}
-.player-earphones{position:absolute;z-index:0;left:-28.125%;top:-55.5556%;width:156.25%;height:auto;max-width:none;pointer-events:none;user-select:none;transform:translate(var(--wire-x,0px),var(--wire-y,0px));transition:transform 520ms ease-out}
+.player-earphones{display:none;position:absolute;z-index:0;left:-28.125%;top:-55.5556%;width:156.25%;height:auto;max-width:none;pointer-events:none;user-select:none;transform:translate(var(--wire-x,0px),var(--wire-y,0px));transition:transform 520ms ease-out}
 .player-assembly:has(.player-pending) .player-earphones{opacity:0}
 .player-assembly:has(.player-arriving) .player-earphones{animation:earphones-appear 600ms ease-in-out both}
 @keyframes earphones-appear{from{opacity:0}to{opacity:1}}

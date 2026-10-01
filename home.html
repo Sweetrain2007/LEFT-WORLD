@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="assets/chat/mobile-chat.css">
 <script src="assets/chat/legacy-routes.js"></script>
 <script defer src="assets/chat/config.js"></script>
+<link rel="stylesheet" href="assets/chat/voice.css">
+<script defer src="assets/chat/voice-library.js"></script>
 <script defer src="assets/chat/chat.js"></script>
 <link rel="stylesheet" href="assets/chat/profile-popup.css">
 <script defer src="assets/chat/profile-popup.js"></script>
@@ -20,6 +22,7 @@
 <symbol id="pin" viewBox="0 0 16 16"><path d="M5 1h6v2h2v6h-2v2H9v4H7v-4H5V9H3V3h2z" fill="#7098c6" stroke="#365878"/><path d="M6 4h4v4H6z" fill="#f1f6ff"/></symbol>
 <symbol id="music" viewBox="0 0 16 16"><path d="M6 2h8v9h-2V5H8v8H6zM2 11h5v3H2zM10 9h4v3h-4z" fill="#496f9e"/></symbol>
 <symbol id="photo" viewBox="0 0 16 16"><path d="M1 2h14v12H1z" fill="#fff" stroke="#637c92"/><path d="M3 10l3-4 3 4 2-2 2 4H3z" fill="#78a69c"/><path d="M11 4h2v2h-2z" fill="#dfc370"/></symbol>
+<symbol id="voice" viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z" fill="#658cb5" stroke="#365878"/><path d="M11 5q3 3 0 6M13 2q5 6 0 12" fill="none" stroke="#496f9e"/></symbol>
 <symbol id="face" viewBox="0 0 16 16"><path d="M4 1h8v2h2v10h-2v2H4v-2H2V3h2z" fill="#ffdf80" stroke="#9b864d"/><path d="M5 5v2m5-2v2M5 10v1h5v-1" fill="none" stroke="#594e34"/></symbol>
 </svg>
 <main class="desktop" aria-label="LEFT'S WORLD 聊天工作区"><div class="chat-home">
@@ -58,6 +61,7 @@
 <button type="button" class="feature-button" data-share="location"><svg class="pixel-icon" aria-hidden="true"><use href="#pin"/></svg>共享位置</button>
 <button type="button" class="feature-button" data-share="music"><svg class="pixel-icon" aria-hidden="true"><use href="#music"/></svg>分享音乐</button>
 <button type="button" class="feature-button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>发送照片</button>
+<button type="button" class="feature-button" data-voice-request><svg class="pixel-icon" aria-hidden="true"><use href="#voice"/></svg>语音</button>
 </div>
 </aside>
 </div>
@@ -92,6 +96,7 @@
     <button type="button" data-share="location"><svg class="pixel-icon" aria-hidden="true"><use href="#pin"/></svg>共享位置</button>
     <button type="button" data-share="music"><svg class="pixel-icon" aria-hidden="true"><use href="#music"/></svg>分享音乐</button>
     <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>发送照片</button>
+    <button type="button" data-voice-request><svg class="pixel-icon" aria-hidden="true"><use href="#voice"/></svg>语音</button>
   </nav>
 </main>
 </body></html>

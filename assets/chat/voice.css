@@ -1,0 +1,6 @@
+.voice-message{display:flex;align-items:center;justify-content:space-between;gap:36px;min-width:132px;min-height:34px;padding:6px 10px;border:1px solid #99afc8;border-radius:0;background:#e2ebf4;box-shadow:inset 1px 1px #fff,inset -1px -1px #c1cbd8;color:#304f73;cursor:pointer;font:12px Tahoma,sans-serif}
+.voice-message:hover{background:#d4e4f8}.voice-message:focus-visible{outline:1px dotted #17447c;outline-offset:2px}.voice-message[aria-pressed="true"]{background:#d2dfed}
+.voice-waves{font:bold 14px monospace;letter-spacing:1px}.voice-message[aria-pressed="true"] .voice-waves{animation:voice-pulse 850ms steps(3,end) infinite}
+@keyframes voice-pulse{0%{clip-path:inset(0 65% 0 0)}50%{clip-path:inset(0 30% 0 0)}100%{clip-path:inset(0)}}
+@media(max-width:767px){.mobile-sharebar{grid-template-columns:repeat(4,minmax(0,1fr))}.mobile-sharebar button{gap:3px}.mobile-chat .voice-message{min-width:120px;min-height:34px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.voice-message[aria-pressed="true"] .voice-waves{animation:none}}
