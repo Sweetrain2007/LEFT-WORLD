@@ -6,11 +6,12 @@
   const text = document.getElementById("note-text"), sky = document.getElementById("sky");
   const reader = document.getElementById("read-dialog"), status = document.getElementById("wall-status");
   const write = document.getElementById("write-message");
-  let state = "idle";
+  let state = "idle", collectionToken = 0, collectionKind = "public", collectionPage = 0, retryDraft = null;
+  const more = document.getElementById("load-more");
   function setState(next) { state = next; document.body.dataset.state = next; }
   function remaining() { document.getElementById("remaining").textContent = `还可写 ${500 - text.value.length} 字`; }
-  function openNote() { if (state === "sending") return; setState("writing"); dialog.showModal(); }
-  function closeNote() { if (state === "sending") return; dialog.close(); setState("idle"); write.focus(); }
+  function openNote() { if (state === "sending" || state === "saving") return; setState("writing"); dialog.showModal(); }
+  function closeNote() { if (state === "sending" || state === "saving") return; dialog.close(); setState("idle"); write.focus(); }
   function addFlower(message) {
     const button = document.createElement("button"); button.type = "button"; button.className = "sky-flower";
     button.style.left = message.x + "%"; button.style.top = message.y + "%";
@@ -18,34 +19,46 @@
     const image = document.createElement("img"); image.src = FLOWER_ASSET; image.alt = ""; button.append(image);
     button.addEventListener("click", () => openCollection("public"));
     sky.append(button);
+    while (sky.children.length > 150) sky.firstElementChild.remove();
+  }
+  async function loadCollection(append=false) {
+    const token = ++collectionToken, kind = collectionKind, page = collectionPage;
+    const list = document.getElementById("message-collection"), note = document.getElementById("collection-note");
+    more.disabled = true; note.textContent = "正在读取留言……";
+    try {
+      const result = await (kind === "mine" ? store.listMine(page) : store.listPublic(page));
+      if (token !== collectionToken) return;
+      if (!append) list.replaceChildren();
+      note.textContent = kind === "mine" ? "当前匿名身份的留言 · PUBLIC + ONLY ME" : "所有访客的公开留言";
+      if (!result.rows.length && !append) {
+        const empty=document.createElement("p"); empty.className="collection-empty";
+        empty.textContent=kind === "mine" ? "还没有写下留言。" : "这里还没有公开留言。"; list.append(empty);
+      }
+      result.rows.forEach(message => {
+        const paper=document.createElement("article");paper.className="collection-letter";
+        const body=document.createElement("p");body.textContent=message.content;
+        const meta=document.createElement("div");meta.className="letter-meta";
+        const date=document.createElement("time");date.dateTime=message.createdAt;date.textContent=new Date(message.createdAt).toLocaleDateString("zh-CN");
+        const scope=document.createElement("span");scope.textContent=message.visibility === "public" ? "PUBLIC" : "ONLY ME";
+        if (kind === "mine" && message.status !== "approved") scope.textContent += message.status === "pending" ? " · 待审核" : " · 未通过";
+        meta.append(date,scope);paper.append(body,meta);list.append(paper);
+      });
+      collectionPage=page+1; more.hidden=!result.hasMore;more.textContent="继续阅读";
+    } catch (error) {
+      if (token !== collectionToken) return;
+      note.textContent=error.message || "读取失败，请重试。";more.hidden=false;more.textContent="重试";
+    } finally {if(token === collectionToken)more.disabled=false;}
   }
   function openCollection(kind) {
-    const mine = kind === "mine";
-    document.getElementById("read-title").textContent = mine ? "MY MESSAGES" : "PUBLIC MESSAGES";
-    document.getElementById("collection-note").textContent = mine
-      ? "当前浏览器身份的留言 · PUBLIC + ONLY ME"
-      : "公开留言 · 当前仅预览本地记录，尚未连接所有访客的留言。";
-    const list = document.getElementById("message-collection"); list.replaceChildren();
-    const rows = mine ? store.listMine() : store.listPublic();
-    if (!rows.length) {
-      const empty = document.createElement("p"); empty.className = "collection-empty";
-      empty.textContent = mine ? "还没有写下留言。愿下一朵勿忘我来自你。" : "这里还没有公开留言。";
-      list.append(empty);
-    }
-    rows.forEach(message => {
-      const paper = document.createElement("article"); paper.className = "collection-letter";
-      const body = document.createElement("p"); body.textContent = message.content;
-      const meta = document.createElement("div"); meta.className = "letter-meta";
-      const date = document.createElement("time");
-      if (Number.isFinite(Date.parse(message.createdAt))) {
-        date.dateTime = message.createdAt; date.textContent = new Date(message.createdAt).toLocaleDateString("zh-CN");
-      }
-      const scope = document.createElement("span"); scope.textContent = message.visibility === "public" ? "PUBLIC" : "ONLY ME";
-      meta.append(date,scope); paper.append(body,meta); list.append(paper);
-    });
-    reader.showModal(); reader.scrollTop = 0;
+    collectionKind=kind;collectionPage=0;
+    document.getElementById("read-title").textContent=kind === "mine" ? "MY MESSAGES" : "PUBLIC MESSAGES";
+    document.getElementById("message-collection").replaceChildren(); more.hidden=true;
+    reader.showModal();reader.scrollTop=0;loadCollection();
   }
-  store.listFlowers().forEach(addFlower);
+  more.addEventListener("click",()=>loadCollection(collectionPage>0));
+  reader.addEventListener("close",()=>{collectionToken++;});
+  store.init().catch(error=>{document.querySelector(".storage-note").textContent=error.message;});
+  store.listFlowers().then(rows=>rows.forEach(addFlower)).catch(error=>{status.textContent=error.message;});
   document.getElementById("my-messages").addEventListener("click", () => openCollection("mine"));
   text.addEventListener("input", () => { text.setCustomValidity(""); remaining(); });
   write.addEventListener("click", openNote);
@@ -53,14 +66,20 @@
   dialog.addEventListener("cancel", event => { event.preventDefault(); closeNote(); });
   document.getElementById("close-read").addEventListener("click", () => reader.close());
   form.addEventListener("submit", async event => {
-    event.preventDefault(); if (state === "sending") return;
+    event.preventDefault(); if (state === "sending" || state === "saving") return;
     if (!text.value.trim()) { text.setCustomValidity("请先写下想对 LEFT 说的话。"); text.reportValidity(); return; }
-    const message = {id: crypto.randomUUID(), content:text.value, visibility:new FormData(form).get("visibility"), form:"flower", createdAt:new Date().toISOString(), x:8 + Math.random()*84, y:10 + Math.random()*76};
-    try { store.save(message); } catch (_) {
-      text.setCustomValidity("未能保存留言，请检查浏览器存储后重试。你的文字仍在这里。"); text.reportValidity(); return;
+    const visibility = new FormData(form).get("visibility");
+    if (!retryDraft || retryDraft.content !== text.value || retryDraft.visibility !== visibility) {
+      retryDraft={id:crypto.randomUUID(),content:text.value,visibility,x:8+Math.random()*84,y:10+Math.random()*76};
     }
-    setState("sending"); write.disabled = true;
-    form.querySelectorAll("button,input,textarea").forEach(el => {el.disabled = true;});
+    setState("saving"); write.disabled=true;
+    form.querySelectorAll("button,input,textarea").forEach(el=>{el.disabled=true;});
+    let message;
+    try {message=await store.save(retryDraft);} catch(error) {
+      form.querySelectorAll("button,input,textarea").forEach(el=>{el.disabled=false;});
+      write.disabled=false;setState("writing");document.querySelector(".storage-note").textContent=error.message || "保存失败，请重试。文字已保留。";return;
+    }
+    retryDraft=null;setState("sending");
     const rect = form.getBoundingClientRect();
     const flower = document.createElement("img"); flower.src = FLOWER_ASSET; flower.alt = ""; flower.className = "flower-flight";
     flower.style.left = rect.left + rect.width/2 - 70 + "px"; flower.style.top = rect.top + rect.height/2 - 70 + "px";
