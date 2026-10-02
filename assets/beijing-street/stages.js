@@ -15,5 +15,19 @@ const beijingStages = [
         "url": "https://b23.tv/ReG5cUs"
       }
     ]
+  },
+  {
+    "id": "beijing-stage-02",
+    "windowId": "beijing-window-02",
+    "date": "2025.12.31",
+    "title": "2026江苏卫视跨年晚会",
+    "artist": "左航",
+    "poster": "assets/beijing-street/stage-02-poster.jpg",
+    "videos": [
+      {
+        "title": "2026江苏卫视跨年晚会 · 左航",
+        "url": "https://b23.tv/AgDZAds"
+      }
+    ]
   }
 ];
