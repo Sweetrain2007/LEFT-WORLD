@@ -37,13 +37,22 @@
     }
     if (voiceAudio.ended) voiceAudio.currentTime = 0;
     const attempt = ++playbackToken;
-    voiceAudio.play().catch(() => { if (attempt === playbackToken) syncVoicePlayback(); });
+    voiceAudio.play().catch(error => {
+      console.error("[LEFT voice] Playback failed", {
+        name: error.name, message: error.message,
+        src: voiceAudio.src, currentSrc: voiceAudio.currentSrc,
+        readyState: voiceAudio.readyState, networkState: voiceAudio.networkState,
+        duration: voiceAudio.duration
+      });
+      if (attempt === playbackToken) syncVoicePlayback();
+    });
     syncVoicePlayback();
   }
   ["play", "pause", "ended", "error"].forEach(event => voiceAudio.addEventListener(event, syncVoicePlayback));
   const durations = new Map();
   function showDuration(src, duration) {
-    if (!Number.isFinite(duration) || duration <= 0) return;
+    // Short voice-message sanity limit; displayed duration still comes from metadata.
+    if (!Number.isFinite(duration) || duration <= 0 || duration > 600) return;
     durations.set(src, duration);
     document.querySelectorAll(".voice-message").forEach(button => {
       if (button.dataset.voiceSrc === src) button.querySelector(".voice-duration").textContent = Math.ceil(duration) + '″';
