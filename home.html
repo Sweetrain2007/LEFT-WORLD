@@ -14,6 +14,8 @@
 <script defer src="assets/chat/profile-popup.js"></script>
 <link rel="stylesheet" href="assets/location/crt-transition.css">
 <script src="assets/location/crt-transition.js"></script>
+<link rel="stylesheet" href="assets/message-wall/entry.css">
+<script defer src="assets/message-wall/entry.js"></script>
 </head>
 <body>
 <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -48,8 +50,8 @@
 <button type="button" class="tool-button" disabled title="表情（尚未开放）" aria-label="表情"><svg class="pixel-icon" aria-hidden="true"><use href="#face"/></svg></button>
 <button type="button" class="tool-button" disabled title="照片（尚未开放）" aria-label="照片"><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg></button>
 </div>
-<label class="sr-only" for="message-draft">消息输入框</label><textarea id="message-draft" aria-describedby="send-status" spellcheck="false"></textarea>
-<div class="input-actions"><span id="send-status">发送功能暂未开放</span><button class="xp-button" type="submit" disabled>发送(S)</button></div>
+<button id="message-draft" class="message-wall-entry" type="button" data-message-wall>LEAVE A MESSAGE FOR LEFT...</button>
+<div class="input-actions"><span id="send-status">留言空间</span><span>点击上方，写给 LEFT</span></div>
 </form>
 </div>
 <aside class="profile-sidebar" aria-label="LEFT 信息与功能">
@@ -88,9 +90,9 @@
     <div class="mobile-tools" role="group" aria-label="输入工具">
       <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#face"/></svg>表情</button>
       <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>图片</button>
-      <span>发送功能暂未开放</span>
+      <span>留言空间</span>
     </div>
-    <div class="mobile-draft-row"><label class="sr-only" for="mobile-message-draft">消息输入框</label><textarea id="mobile-message-draft" rows="2" spellcheck="false" aria-label="消息草稿"></textarea><button type="submit" disabled>发送</button></div>
+    <div class="mobile-draft-row"><button id="mobile-message-draft" class="message-wall-entry" type="button" data-message-wall>LEAVE A MESSAGE FOR LEFT...</button></div>
   </form>
   <nav class="mobile-sharebar" aria-label="共享功能">
     <button type="button" data-share="location"><svg class="pixel-icon" aria-hidden="true"><use href="#pin"/></svg>共享位置</button>

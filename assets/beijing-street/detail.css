@@ -1,0 +1,5 @@
+*{box-sizing:border-box}body{margin:0;font:14px/1.7 "Microsoft YaHei",sans-serif;color:#222;background:white}
+.beijing-stage{width:min(900px,calc(100% - 40px));margin:24px auto 40px}a{color:#244c83;text-underline-offset:4px}
+.stage-poster{display:block;width:auto;max-width:100%;height:auto;max-height:76vh;max-height:76dvh;margin:24px auto}
+.stage-videos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.stage-videos a{overflow-wrap:anywhere}
+@media(max-width:600px){.stage-videos{grid-template-columns:1fr;gap:16px}}

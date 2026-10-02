@@ -1,0 +1,41 @@
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;font-family:Tahoma,SimSun,"宋体",serif}
+.message-wall{height:100vh;height:100dvh;overflow:hidden;color:#d0ddf5;background:#030a30 url("night-sky.png") center/cover no-repeat}
+button,a,textarea,input{font:inherit}button{cursor:pointer}button:disabled{cursor:wait}button:focus-visible,a:focus-visible{outline:1px dotted currentColor;outline-offset:4px}
+.wall-header{position:fixed;z-index:2;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:calc(22px + env(safe-area-inset-top)) 28px 16px;font-size:10px;letter-spacing:.15em}
+.old-control{padding:7px 11px;border:1px solid #8d9cb8;background:#dce4ef;color:#244264;box-shadow:inset 1px 1px #fff,inset -1px -1px #a8b5c8;text-decoration:none;font-size:11px;letter-spacing:.02em}
+.old-control:active{box-shadow:inset 1px 1px #778ba6}.sky{position:absolute;inset:76px 6% 128px}
+.wall-footer{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom));left:15px;right:15px;text-align:center;pointer-events:none}
+.wall-footer>span{font-size:11px;letter-spacing:.36em}.wall-footer p{font-size:12px;letter-spacing:.12em;margin:12px 0}.wall-footer small{font-size:10px;color:#a1b0cf}
+dialog{padding:0;border:0;background:transparent;color:#3b4e69;width:min(480px,calc(100% - 32px));max-height:calc(100dvh - 38px);overflow:auto;box-shadow:3px 7px 24px #0004}dialog::backdrop{background:transparent}
+.note-paper{margin:0;padding:22px 28px 25px;border:1px solid #d0d3d7;background:#f4f2e9;box-shadow:inset 0 0 0 5px #faf8f0;transform-origin:center}
+.note-top{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:9px;letter-spacing:.12em;color:#75839a}
+.note-close{border:1px solid #adb8c6;background:#e5e8ed;box-shadow:inset 1px 1px white;color:#516782;padding:0;width:24px;height:24px;font:18px Tahoma}
+.note-kicker{margin:28px 0 9px;font-size:10px;letter-spacing:.22em}h1{font-size:16px;letter-spacing:.07em;font-weight:normal;margin:0 0 18px}
+.note-rule{height:3px;border-top:1px solid #95a6bb;border-bottom:1px solid #d8dee5;margin-bottom:22px}
+label[for="note-text"]{font-size:12px;color:#768398}
+#note-text{display:block;width:100%;height:170px;margin:12px 0 7px;padding:0 4px;resize:vertical;max-height:30dvh;min-height:70px;border:0;border-bottom:1px solid #cbd0d6;border-radius:0;outline-offset:3px;background:repeating-linear-gradient(transparent 0,transparent 27px,#dce0e4 27px,#dce0e4 28px);color:#31455e;font:14px/28px SimSun,serif}
+#note-text::placeholder{color:#9ba5b1}.note-meta{display:flex;justify-content:space-between;font-size:9px;color:#8590a0;gap:8px}
+fieldset{border:0;padding:0;margin:22px 0 12px;display:flex;gap:24px;font-size:10px;letter-spacing:.06em}legend{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}fieldset label{display:flex;align-items:center;gap:5px}input{accent-color:#5d7aa4;margin:0}
+.storage-note{font:10px/1.7 SimSun,serif;color:#7b8798;margin:0 0 18px}
+.send-note{display:flex;justify-content:space-between;width:100%;border:1px solid #8d9cb1;background:#dfe6ed;box-shadow:inset 1px 1px white,inset -1px -1px #b4bdca;padding:10px 12px;font-size:11px;color:#365272;letter-spacing:.05em}
+.flower-flight{position:fixed;width:140px;height:140px;object-fit:contain;z-index:5;pointer-events:none}
+.sky-flower{position:absolute;width:36px;height:36px;transform:translate(-50%,-50%);display:grid;place-items:center;padding:0;border:0;background:transparent}
+.sky-flower img{width:12px;height:12px;object-fit:contain;transition:transform .4s ease-out}.sky-flower:hover img,.sky-flower:focus-visible img{transform:scale(2.2)}
+#read-text{font:14px/2 SimSun,serif;white-space:pre-wrap;overflow-wrap:anywhere;margin:24px 0}#read-scope{font-size:10px;color:#748297}
+@media(max-width:600px){.wall-header{padding:calc(12px + env(safe-area-inset-top)) 12px 10px;gap:6px}.wall-header>span{display:none}.note-paper{padding:17px 20px 20px}.note-kicker{margin-top:20px}h1{font-size:14px}.note-rule{margin-bottom:16px}.sky{inset:66px 7% 115px}.wall-footer{bottom:calc(17px + env(safe-area-inset-bottom))}.wall-footer p{font-size:11px}.old-control{min-height:34px}#note-text{font-size:16px}.sky-flower{width:44px;height:44px}}
+@media(prefers-reduced-motion:reduce){.sky-flower img{transition:none}}
+body[data-state="sending"] #note-dialog{box-shadow:none;overflow:visible}
+
+.wall-header>span{margin-right:auto}.wall-header{gap:10px}
+.collection-dialog{width:min(620px,calc(100% - 32px));background:#eeeee6}
+.collection-paper{padding:24px 28px;background:#f4f2e9;border:1px solid #d0d3d7}
+.collection-paper h2{font:12px Tahoma,serif;letter-spacing:.12em;margin:0;color:#435c7c}
+#collection-note{font:11px/1.8 SimSun,serif;color:#718096;margin:20px 0}
+.collection-letter{padding:22px 3px;border-top:1px solid #bbc7d3}
+.collection-letter p{font:14px/2 SimSun,serif;white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 16px}
+.letter-meta{display:flex;justify-content:space-between;font:10px Tahoma,serif;color:#7b889a}
+.collection-empty{font:13px/2 SimSun,serif;margin:34px 0;color:#75849a}
+@media(max-width:600px){#my-messages span{display:none}.wall-header{gap:6px}.wall-header .old-control{padding:7px 8px;font-size:10px}.collection-paper{padding:20px}.wall-footer p{max-width:310px;margin:12px auto;line-height:1.6}}
+
+.wall-footer .wall-announcement{position:absolute;width:1px;height:1px;padding:0;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

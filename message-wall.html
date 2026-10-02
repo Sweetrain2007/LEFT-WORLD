@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LEFT'S WORLD · Message Wall</title><link rel="stylesheet" href="assets/message-wall/wall.css"><script defer src="assets/message-wall/store.js"></script><script defer src="assets/message-wall/wall.js"></script></head>
+<body class="message-wall">
+<header class="wall-header"><a class="old-control" href="home.html">‹ 返回 CHAT</a><span>LEFT'S WORLD / MESSAGE WALL</span><button class="old-control" id="my-messages" type="button">MY MESSAGES <span> / 查看我的留言</span></button><button class="old-control" id="write-message" type="button">写留言 ＋</button></header>
+<main class="sky" id="sky" aria-label="勿忘我留言夜空"></main>
+<footer class="wall-footer"><span>FORGET ME NOT</span><p id="wall-status" class="wall-announcement" role="status"></p></footer>
+<dialog id="note-dialog" aria-labelledby="note-title"><form id="note-form" class="note-paper"><div class="paper-ui">
+<div class="note-top"><span>LEFT'S WORLD · LETTER</span><button type="button" class="note-close" id="close-note" aria-label="关闭留言窗口">×</button></div>
+<p class="note-kicker">TO: LEFT</p><h1 id="note-title">LEAVE A MESSAGE FOR LEFT</h1><div class="note-rule"></div>
+<label for="note-text">写下想对 LEFT 说的话……</label><textarea id="note-text" maxlength="500" required placeholder="Dear LEFT," spellcheck="false"></textarea>
+<div class="note-meta"><span>FROM: RIGHT</span><output id="remaining" for="note-text">还可写 500 字</output></div>
+<fieldset><legend>公开范围</legend><label><input type="radio" name="visibility" value="public" checked> EVERYONE</label><label><input type="radio" name="visibility" value="private"> ONLY ME</label></fieldset>
+<p class="storage-note">范围选项仅作记录，尚未接入公开发布或私密权限服务。</p>
+<button type="submit" class="send-note">SEND TO LEFT'S WORLD <span aria-hidden="true">↗</span></button></div></form></dialog>
+<dialog id="read-dialog" class="collection-dialog" aria-labelledby="read-title"><section class="collection-paper"><div class="note-top"><h2 id="read-title">PUBLIC MESSAGES</h2><button class="note-close" id="close-read" type="button" aria-label="关闭留言列表">×</button></div><p id="collection-note"></p><div id="message-collection"></div></section></dialog>
+</body></html>
