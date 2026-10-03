@@ -1,0 +1,14 @@
+@font-face{font-family:ChatExitPixel;src:url("../intro/PressStart2P-Regular.ttf") format("truetype");font-display:swap}
+.window-controls>.chat-exit-trigger{width:19px;height:19px;position:relative;padding:0;border:1px solid #e1edfb;border-radius:0;cursor:pointer}
+.chat-exit-trigger:hover{filter:brightness(1.12)}.chat-exit-trigger:active{filter:brightness(.88)}
+.chat-exit-dialog{position:fixed;inset:0;margin:auto;width:min(380px,calc(100vw - 40px));box-sizing:border-box;padding:45px 20px 24px;border:2px solid #91a4b6;border-radius:0;background:repeating-linear-gradient(0deg,transparent 0 3px,#ffffff04 3px 4px),#0c1722;color:#cfdfeb;box-shadow:inset 1px 1px #d1dce5,inset -1px -1px #334d63;text-align:center}
+.chat-exit-dialog::backdrop{background:#050b1466}
+.chat-exit-cancel{position:absolute;right:7px;top:6px;width:22px;height:22px;padding:0;border:1px solid #8fa5b9;border-radius:0;background:#24394c;color:#dce6ef;font:18px Tahoma;cursor:pointer}
+.chat-exit-line{min-height:48px;margin:8px 0 22px;font:10px/2 ChatExitPixel,monospace;text-shadow:0 0 3px #c4dded55}
+.chat-exit-cursor{animation:chat-exit-blink .65s steps(1) infinite}
+.chat-exit-leave{padding:5px 20px;border:1px solid #8195a7;border-radius:0;box-shadow:inset 1px 1px #fff,inset -1px -1px #8293a4;background:#dbe3eb;color:#20364c;font:12px Tahoma,sans-serif;cursor:pointer}
+.chat-exit-leave:hover{background:#e8eff5}.chat-exit-leave:active{box-shadow:inset 1px 1px #8293a4}
+body.chat-exiting>.desktop,body.chat-exiting>.mobile-chat,.chat-exiting .chat-exit-dialog{pointer-events:none;animation:chat-exit-off 420ms ease-in forwards}
+@keyframes chat-exit-blink{50%{opacity:0}}
+@keyframes chat-exit-off{0%{filter:brightness(1);opacity:1;transform:scaleY(1)}70%{filter:brightness(.4);opacity:.65;transform:scaleY(.99)}100%{filter:brightness(0);opacity:0;transform:scaleY(.96)}}
+@media(prefers-reduced-motion:reduce){.chat-exit-cursor{animation:none}.chat-exiting .chat-exit-dialog,body.chat-exiting>.desktop,body.chat-exiting>.mobile-chat{animation:none;opacity:0}}

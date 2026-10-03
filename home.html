@@ -9,6 +9,8 @@
 <script defer src="assets/chat/config.js"></script>
 <link rel="stylesheet" href="assets/chat/voice.css">
 <script defer src="assets/chat/voice-library.js"></script>
+<link rel="stylesheet" href="assets/chat/photo.css">
+<script defer src="assets/chat/photo-library.js"></script>
 <script defer src="assets/chat/chat.js"></script>
 <link rel="stylesheet" href="assets/chat/profile-popup.css">
 <script defer src="assets/chat/profile-popup.js"></script>
@@ -16,6 +18,8 @@
 <script src="assets/location/crt-transition.js"></script>
 <link rel="stylesheet" href="assets/message-wall/entry.css">
 <script defer src="assets/message-wall/entry.js"></script>
+<link rel="stylesheet" href="assets/chat/exit.css">
+<script defer src="assets/chat/exit.js"></script>
 </head>
 <body>
 <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -48,7 +52,7 @@
 <div class="input-toolbar" role="group" aria-label="输入工具">
 <button type="button" class="tool-button" disabled title="文字格式（尚未开放）" aria-label="文字格式"><b class="text-tool">A</b></button><span class="toolbar-separator" aria-hidden="true"></span>
 <button type="button" class="tool-button" disabled title="表情（尚未开放）" aria-label="表情"><svg class="pixel-icon" aria-hidden="true"><use href="#face"/></svg></button>
-<button type="button" class="tool-button" disabled title="照片（尚未开放）" aria-label="照片"><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg></button>
+<button type="button" class="tool-button" data-photo-request title="发送照片" aria-label="照片"><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg></button>
 </div>
 <button id="message-draft" class="message-wall-entry" type="button" data-message-wall>LEAVE A MESSAGE FOR LEFT...</button>
 <div class="input-actions"><span id="send-status">留言空间</span><span>点击上方，写给 LEFT</span></div>
@@ -62,7 +66,7 @@
 <div class="feature-list" aria-label="共享功能">
 <button type="button" class="feature-button" data-share="location"><svg class="pixel-icon" aria-hidden="true"><use href="#pin"/></svg>共享位置</button>
 <button type="button" class="feature-button" data-share="music"><svg class="pixel-icon" aria-hidden="true"><use href="#music"/></svg>分享音乐</button>
-<button type="button" class="feature-button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>发送照片</button>
+<button type="button" class="feature-button" data-photo-request><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>发送照片</button>
 <button type="button" class="feature-button" data-voice-request><svg class="pixel-icon" aria-hidden="true"><use href="#voice"/></svg>语音</button>
 </div>
 </aside>
@@ -89,7 +93,7 @@
   <form class="mobile-composer" id="mobile-chat-input">
     <div class="mobile-tools" role="group" aria-label="输入工具">
       <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#face"/></svg>表情</button>
-      <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>图片</button>
+      <button type="button" data-photo-request><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>图片</button>
       <span>留言空间</span>
     </div>
     <div class="mobile-draft-row"><button id="mobile-message-draft" class="message-wall-entry" type="button" data-message-wall>LEAVE A MESSAGE FOR LEFT...</button></div>
@@ -97,7 +101,7 @@
   <nav class="mobile-sharebar" aria-label="共享功能">
     <button type="button" data-share="location"><svg class="pixel-icon" aria-hidden="true"><use href="#pin"/></svg>共享位置</button>
     <button type="button" data-share="music"><svg class="pixel-icon" aria-hidden="true"><use href="#music"/></svg>分享音乐</button>
-    <button type="button" disabled><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>发送照片</button>
+    <button type="button" data-photo-request><svg class="pixel-icon" aria-hidden="true"><use href="#photo"/></svg>发送照片</button>
     <button type="button" data-voice-request><svg class="pixel-icon" aria-hidden="true"><use href="#voice"/></svg>语音</button>
   </nav>
 </main>

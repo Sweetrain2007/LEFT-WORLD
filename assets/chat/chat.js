@@ -9,6 +9,20 @@
   const buttons = [...document.querySelectorAll("[data-share]")];
   const voiceButtons = [...document.querySelectorAll("[data-voice-request]")];
   const voiceLibrary = typeof leftVoiceLibrary === "undefined" ? [] : leftVoiceLibrary;
+  const photoButtons = [...document.querySelectorAll("[data-photo-request]")];
+  const photoLibrary = typeof leftPhotoLibrary === "undefined" ? [] : leftPhotoLibrary;
+  let lastPhotoId = null, photoSequence = 0;
+  const photoPreview = document.createElement("dialog");
+  photoPreview.className = "chat-photo-preview";
+  photoPreview.setAttribute("aria-label", "照片预览");
+  const previewImage = document.createElement("img"); previewImage.alt = "LEFT 发来的照片";
+  const previewClose = document.createElement("button");
+  previewClose.type = "button"; previewClose.className = "chat-photo-close";
+  previewClose.textContent = "×"; previewClose.setAttribute("aria-label", "关闭照片预览");
+  photoPreview.append(previewImage, previewClose); document.body.append(photoPreview);
+  previewClose.addEventListener("click", () => photoPreview.close());
+  photoPreview.addEventListener("click", event => { if (event.target === photoPreview) photoPreview.close(); });
+  photoPreview.addEventListener("close", () => previewImage.removeAttribute("src"));
   const voiceAudio = new Audio();
   voiceAudio.preload = "metadata";
   let activeVoiceId = null, lastVoiceId = null, voiceSequence = 0, playbackToken = 0;
@@ -124,6 +138,14 @@
     content.append(sender);
     if (message.type === "text") {
       content.append(element("p", "message-text", message.text));
+    } else if (message.type === "photo") {
+      const photo = element("button", "chat-photo-message");
+      photo.type = "button"; photo.setAttribute("aria-label", "预览 LEFT 发来的照片");
+      const picture = element("img", "chat-photo-image"); picture.alt = "LEFT 发来的照片";
+      picture.addEventListener("load", () => { if (row.isConnected) list.scrollTop = list.scrollHeight; }, {once:true});
+      picture.src = message.src; photo.append(picture);
+      photo.addEventListener("click", () => { previewImage.src = message.src; photoPreview.showModal(); });
+      content.append(photo, element("p", "message-text chat-photo-caption", message.text));
     } else if (message.type === "voice") {
       const bubble = element("button", "voice-message");
       bubble.type = "button";
@@ -185,6 +207,23 @@
       });
     }, config.shareMessageDelay));
   }
+  function requestPhoto() {
+    if (pending.has("photo")) return;
+    const eligible = photoLibrary.filter(item => typeof item.id === "string" && item.id &&
+      typeof item.src === "string" && item.src.trim() && typeof item.text === "string" && item.text.trim());
+    if (!eligible.length) return;
+    const different = eligible.filter(item => item.id !== lastPhotoId);
+    const pool = different.length ? different : eligible;
+    photoButtons.forEach(button => { button.disabled = true; button.setAttribute("aria-busy", "true"); });
+    pending.set("photo", setTimeout(() => {
+      pending.delete("photo");
+      const chosen = pool[Math.floor(Math.random() * pool.length)]; lastPhotoId = chosen.id;
+      clearTimeout(firstTimer); appendMessage(intro);
+      appendMessage({id:"photo-" + (++photoSequence), sender:"left", type:"photo", src:chosen.src, text:chosen.text});
+      photoButtons.forEach(button => { button.disabled = false; button.removeAttribute("aria-busy"); });
+    }, 500 + Math.floor(Math.random() * 701)));
+  }
+  photoButtons.forEach(button => button.addEventListener("click", requestPhoto));
   function requestVoice() {
     if (pending.has("voice") || !voiceLibrary.length) return;
     const eligible = voiceLibrary.filter(item => typeof item.src === "string" && item.src.trim());
@@ -204,6 +243,9 @@
   }
   voiceButtons.forEach(button => button.addEventListener("click", requestVoice));
   function restoreBase() {
+    if (photoPreview.open) photoPreview.close();
+    lastPhotoId = null;
+    photoButtons.forEach(button => { button.disabled = false; button.removeAttribute("aria-busy"); });
     stopVoice();
     voiceButtons.forEach(button => { button.disabled = false; button.removeAttribute("aria-busy"); });
     clearTimeout(firstTimer);
