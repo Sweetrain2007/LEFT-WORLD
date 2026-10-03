@@ -229,6 +229,1143 @@ const beijingWindows = [
     "width": 2.44328,
     "height": 11.06195,
     "arched": false,
-    "rows": 3
+    "rows": 4
+  }
+];
+
+// Stable cells: numbered left-to-right, top-to-bottom inside each existing window.
+// Coordinates are relative to that window, inset from the painted mullions.
+const beijingWindowCells = [
+  {
+    "id": "beijing-window-01-cell-01",
+    "windowId": "beijing-window-01",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 37,
+    "shape": "arch-left"
+  },
+  {
+    "id": "beijing-window-01-cell-02",
+    "windowId": "beijing-window-01",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 37,
+    "shape": "arch-right"
+  },
+  {
+    "id": "beijing-window-01-cell-03",
+    "windowId": "beijing-window-01",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 46,
+    "width": 41,
+    "height": 51
+  },
+  {
+    "id": "beijing-window-01-cell-04",
+    "windowId": "beijing-window-01",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 46,
+    "width": 40,
+    "height": 51
+  },
+  {
+    "id": "beijing-window-02-cell-01",
+    "windowId": "beijing-window-02",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-02-cell-02",
+    "windowId": "beijing-window-02",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-02-cell-03",
+    "windowId": "beijing-window-02",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 36,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-02-cell-04",
+    "windowId": "beijing-window-02",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 36,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-02-cell-05",
+    "windowId": "beijing-window-02",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 71,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-02-cell-06",
+    "windowId": "beijing-window-02",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 71,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-03-cell-01",
+    "windowId": "beijing-window-03",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-03-cell-02",
+    "windowId": "beijing-window-03",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-03-cell-03",
+    "windowId": "beijing-window-03",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 37,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-03-cell-04",
+    "windowId": "beijing-window-03",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 37,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-03-cell-05",
+    "windowId": "beijing-window-03",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 71,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-03-cell-06",
+    "windowId": "beijing-window-03",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 71,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-04-cell-01",
+    "windowId": "beijing-window-04",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-04-cell-02",
+    "windowId": "beijing-window-04",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-04-cell-03",
+    "windowId": "beijing-window-04",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 36,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-04-cell-04",
+    "windowId": "beijing-window-04",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 36,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-04-cell-05",
+    "windowId": "beijing-window-04",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 72,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-04-cell-06",
+    "windowId": "beijing-window-04",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 72,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-05-cell-01",
+    "windowId": "beijing-window-05",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-05-cell-02",
+    "windowId": "beijing-window-05",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-05-cell-03",
+    "windowId": "beijing-window-05",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 37,
+    "width": 41,
+    "height": 29
+  },
+  {
+    "id": "beijing-window-05-cell-04",
+    "windowId": "beijing-window-05",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 37,
+    "width": 40,
+    "height": 29
+  },
+  {
+    "id": "beijing-window-05-cell-05",
+    "windowId": "beijing-window-05",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 73,
+    "width": 41,
+    "height": 25
+  },
+  {
+    "id": "beijing-window-05-cell-06",
+    "windowId": "beijing-window-05",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 73,
+    "width": 40,
+    "height": 25
+  },
+  {
+    "id": "beijing-window-06-cell-01",
+    "windowId": "beijing-window-06",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-06-cell-02",
+    "windowId": "beijing-window-06",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-06-cell-03",
+    "windowId": "beijing-window-06",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 37,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-06-cell-04",
+    "windowId": "beijing-window-06",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 37,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-06-cell-05",
+    "windowId": "beijing-window-06",
+    "houseId": "house-01",
+    "x": 3,
+    "y": 73,
+    "width": 41,
+    "height": 25
+  },
+  {
+    "id": "beijing-window-06-cell-06",
+    "windowId": "beijing-window-06",
+    "houseId": "house-01",
+    "x": 57,
+    "y": 73,
+    "width": 40,
+    "height": 25
+  },
+  {
+    "id": "beijing-window-07-cell-01",
+    "windowId": "beijing-window-07",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 42,
+    "shape": "arch-left"
+  },
+  {
+    "id": "beijing-window-07-cell-02",
+    "windowId": "beijing-window-07",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 42,
+    "shape": "arch-right"
+  },
+  {
+    "id": "beijing-window-07-cell-03",
+    "windowId": "beijing-window-07",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 52,
+    "width": 41,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-07-cell-04",
+    "windowId": "beijing-window-07",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 52,
+    "width": 40,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-08-cell-01",
+    "windowId": "beijing-window-08",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 41,
+    "shape": "arch-left"
+  },
+  {
+    "id": "beijing-window-08-cell-02",
+    "windowId": "beijing-window-08",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 41,
+    "shape": "arch-right"
+  },
+  {
+    "id": "beijing-window-08-cell-03",
+    "windowId": "beijing-window-08",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 51,
+    "width": 41,
+    "height": 47
+  },
+  {
+    "id": "beijing-window-08-cell-04",
+    "windowId": "beijing-window-08",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 51,
+    "width": 40,
+    "height": 47
+  },
+  {
+    "id": "beijing-window-09-cell-01",
+    "windowId": "beijing-window-09",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 29
+  },
+  {
+    "id": "beijing-window-09-cell-02",
+    "windowId": "beijing-window-09",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 29
+  },
+  {
+    "id": "beijing-window-09-cell-03",
+    "windowId": "beijing-window-09",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 39,
+    "width": 41,
+    "height": 25
+  },
+  {
+    "id": "beijing-window-09-cell-04",
+    "windowId": "beijing-window-09",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 39,
+    "width": 40,
+    "height": 25
+  },
+  {
+    "id": "beijing-window-09-cell-05",
+    "windowId": "beijing-window-09",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 72,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-09-cell-06",
+    "windowId": "beijing-window-09",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 72,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-10-cell-01",
+    "windowId": "beijing-window-10",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 29
+  },
+  {
+    "id": "beijing-window-10-cell-02",
+    "windowId": "beijing-window-10",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 29
+  },
+  {
+    "id": "beijing-window-10-cell-03",
+    "windowId": "beijing-window-10",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 39,
+    "width": 41,
+    "height": 25
+  },
+  {
+    "id": "beijing-window-10-cell-04",
+    "windowId": "beijing-window-10",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 39,
+    "width": 40,
+    "height": 25
+  },
+  {
+    "id": "beijing-window-10-cell-05",
+    "windowId": "beijing-window-10",
+    "houseId": "house-02",
+    "x": 3,
+    "y": 72,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-10-cell-06",
+    "windowId": "beijing-window-10",
+    "houseId": "house-02",
+    "x": 57,
+    "y": 72,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-11-cell-01",
+    "windowId": "beijing-window-11",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 41,
+    "shape": "arch-left"
+  },
+  {
+    "id": "beijing-window-11-cell-02",
+    "windowId": "beijing-window-11",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 41,
+    "shape": "arch-right"
+  },
+  {
+    "id": "beijing-window-11-cell-03",
+    "windowId": "beijing-window-11",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 52,
+    "width": 41,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-11-cell-04",
+    "windowId": "beijing-window-11",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 52,
+    "width": 40,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-12-cell-01",
+    "windowId": "beijing-window-12",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 41,
+    "shape": "arch-left"
+  },
+  {
+    "id": "beijing-window-12-cell-02",
+    "windowId": "beijing-window-12",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 41,
+    "shape": "arch-right"
+  },
+  {
+    "id": "beijing-window-12-cell-03",
+    "windowId": "beijing-window-12",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 52,
+    "width": 41,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-12-cell-04",
+    "windowId": "beijing-window-12",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 52,
+    "width": 40,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-13-cell-01",
+    "windowId": "beijing-window-13",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-13-cell-02",
+    "windowId": "beijing-window-13",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-13-cell-03",
+    "windowId": "beijing-window-13",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 37,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-13-cell-04",
+    "windowId": "beijing-window-13",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 37,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-13-cell-05",
+    "windowId": "beijing-window-13",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 72,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-13-cell-06",
+    "windowId": "beijing-window-13",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 72,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-14-cell-01",
+    "windowId": "beijing-window-14",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-14-cell-02",
+    "windowId": "beijing-window-14",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-14-cell-03",
+    "windowId": "beijing-window-14",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 37,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-14-cell-04",
+    "windowId": "beijing-window-14",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 37,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-14-cell-05",
+    "windowId": "beijing-window-14",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 72,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-14-cell-06",
+    "windowId": "beijing-window-14",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 72,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-15-cell-01",
+    "windowId": "beijing-window-15",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-15-cell-02",
+    "windowId": "beijing-window-15",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-15-cell-03",
+    "windowId": "beijing-window-15",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 36,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-15-cell-04",
+    "windowId": "beijing-window-15",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 36,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-15-cell-05",
+    "windowId": "beijing-window-15",
+    "houseId": "house-03",
+    "x": 3,
+    "y": 72,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-15-cell-06",
+    "windowId": "beijing-window-15",
+    "houseId": "house-03",
+    "x": 57,
+    "y": 72,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-16-cell-01",
+    "windowId": "beijing-window-16",
+    "houseId": "house-04",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 44,
+    "shape": "arch-left"
+  },
+  {
+    "id": "beijing-window-16-cell-02",
+    "windowId": "beijing-window-16",
+    "houseId": "house-04",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 44,
+    "shape": "arch-right"
+  },
+  {
+    "id": "beijing-window-16-cell-03",
+    "windowId": "beijing-window-16",
+    "houseId": "house-04",
+    "x": 3,
+    "y": 54,
+    "width": 41,
+    "height": 44
+  },
+  {
+    "id": "beijing-window-16-cell-04",
+    "windowId": "beijing-window-16",
+    "houseId": "house-04",
+    "x": 57,
+    "y": 54,
+    "width": 40,
+    "height": 44
+  },
+  {
+    "id": "beijing-window-17-cell-01",
+    "windowId": "beijing-window-17",
+    "houseId": "house-04",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-17-cell-02",
+    "windowId": "beijing-window-17",
+    "houseId": "house-04",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-17-cell-03",
+    "windowId": "beijing-window-17",
+    "houseId": "house-04",
+    "x": 3,
+    "y": 38,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-17-cell-04",
+    "windowId": "beijing-window-17",
+    "houseId": "house-04",
+    "x": 57,
+    "y": 38,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-17-cell-05",
+    "windowId": "beijing-window-17",
+    "houseId": "house-04",
+    "x": 3,
+    "y": 72,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-17-cell-06",
+    "windowId": "beijing-window-17",
+    "houseId": "house-04",
+    "x": 57,
+    "y": 72,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-18-cell-01",
+    "windowId": "beijing-window-18",
+    "houseId": "house-04",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-18-cell-02",
+    "windowId": "beijing-window-18",
+    "houseId": "house-04",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-18-cell-03",
+    "windowId": "beijing-window-18",
+    "houseId": "house-04",
+    "x": 3,
+    "y": 37,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-18-cell-04",
+    "windowId": "beijing-window-18",
+    "houseId": "house-04",
+    "x": 57,
+    "y": 37,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-18-cell-05",
+    "windowId": "beijing-window-18",
+    "houseId": "house-04",
+    "x": 3,
+    "y": 72,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-18-cell-06",
+    "windowId": "beijing-window-18",
+    "houseId": "house-04",
+    "x": 57,
+    "y": 72,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-19-cell-01",
+    "windowId": "beijing-window-19",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 41,
+    "shape": "arch-left"
+  },
+  {
+    "id": "beijing-window-19-cell-02",
+    "windowId": "beijing-window-19",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 41,
+    "shape": "arch-right"
+  },
+  {
+    "id": "beijing-window-19-cell-03",
+    "windowId": "beijing-window-19",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 52,
+    "width": 41,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-19-cell-04",
+    "windowId": "beijing-window-19",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 52,
+    "width": 40,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-20-cell-01",
+    "windowId": "beijing-window-20",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 41,
+    "shape": "arch-left"
+  },
+  {
+    "id": "beijing-window-20-cell-02",
+    "windowId": "beijing-window-20",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 41,
+    "shape": "arch-right"
+  },
+  {
+    "id": "beijing-window-20-cell-03",
+    "windowId": "beijing-window-20",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 52,
+    "width": 41,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-20-cell-04",
+    "windowId": "beijing-window-20",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 52,
+    "width": 40,
+    "height": 46
+  },
+  {
+    "id": "beijing-window-21-cell-01",
+    "windowId": "beijing-window-21",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-21-cell-02",
+    "windowId": "beijing-window-21",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 26
+  },
+  {
+    "id": "beijing-window-21-cell-03",
+    "windowId": "beijing-window-21",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 37,
+    "width": 41,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-21-cell-04",
+    "windowId": "beijing-window-21",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 37,
+    "width": 40,
+    "height": 28
+  },
+  {
+    "id": "beijing-window-21-cell-05",
+    "windowId": "beijing-window-21",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 74,
+    "width": 41,
+    "height": 24
+  },
+  {
+    "id": "beijing-window-21-cell-06",
+    "windowId": "beijing-window-21",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 74,
+    "width": 40,
+    "height": 24
+  },
+  {
+    "id": "beijing-window-22-cell-01",
+    "windowId": "beijing-window-22",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-22-cell-02",
+    "windowId": "beijing-window-22",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-22-cell-03",
+    "windowId": "beijing-window-22",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 38,
+    "width": 41,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-22-cell-04",
+    "windowId": "beijing-window-22",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 38,
+    "width": 40,
+    "height": 27
+  },
+  {
+    "id": "beijing-window-22-cell-05",
+    "windowId": "beijing-window-22",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 74,
+    "width": 41,
+    "height": 24
+  },
+  {
+    "id": "beijing-window-22-cell-06",
+    "windowId": "beijing-window-22",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 74,
+    "width": 40,
+    "height": 24
+  },
+  {
+    "id": "beijing-window-23-cell-01",
+    "windowId": "beijing-window-23",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 2,
+    "width": 41,
+    "height": 21
+  },
+  {
+    "id": "beijing-window-23-cell-02",
+    "windowId": "beijing-window-23",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 2,
+    "width": 40,
+    "height": 21
+  },
+  {
+    "id": "beijing-window-23-cell-03",
+    "windowId": "beijing-window-23",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 30,
+    "width": 41,
+    "height": 19
+  },
+  {
+    "id": "beijing-window-23-cell-04",
+    "windowId": "beijing-window-23",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 30,
+    "width": 40,
+    "height": 19
+  },
+  {
+    "id": "beijing-window-23-cell-05",
+    "windowId": "beijing-window-23",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 56,
+    "width": 41,
+    "height": 18
+  },
+  {
+    "id": "beijing-window-23-cell-06",
+    "windowId": "beijing-window-23",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 56,
+    "width": 40,
+    "height": 18
+  },
+  {
+    "id": "beijing-window-23-cell-07",
+    "windowId": "beijing-window-23",
+    "houseId": "house-05",
+    "x": 3,
+    "y": 81,
+    "width": 41,
+    "height": 17
+  },
+  {
+    "id": "beijing-window-23-cell-08",
+    "windowId": "beijing-window-23",
+    "houseId": "house-05",
+    "x": 57,
+    "y": 81,
+    "width": 40,
+    "height": 17
   }
 ];
