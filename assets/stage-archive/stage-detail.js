@@ -8,7 +8,7 @@
   const template = document.createElement("template");
   template.innerHTML = `
     <nav class="archive-nav" aria-label="档案导航">
-      <a class="archive-back" data-field="back">← 返回舞台档案</a>
+      <a class="archive-back" data-field="back">← 返回长江国际</a>
       <span class="archive-brand">LEFT’S WORLD</span>
     </nav>
     <article class="archive-window" aria-labelledby="stage-title">

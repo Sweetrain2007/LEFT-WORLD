@@ -11,7 +11,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "videoLabel": "左航 cut",
     "poster": "images/stage-01.png",
     "videoUrl": "https://b23.tv/mjHbTZB",
-    "returnUrl": "changjiang-umbrella.html"
+    "returnUrl": "changjiang.html"
   },
   "hour-25": {
     "number": "02",
@@ -23,7 +23,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "左航 cut",
     "poster": "images/stage-02.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/kkt9dpd"
   },
   "one-way-screening": {
@@ -36,7 +36,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "左航 cut",
     "poster": "images/stage-03.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/ubySlCM"
   },
   "countdown": {
@@ -49,7 +49,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "左航 cut",
     "poster": "images/stage-04.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/0v577rD"
   },
   "circle": {
@@ -62,7 +62,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "左航 cut",
     "poster": "images/stage-05.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/klq4N40"
   },
   "maze": {
@@ -75,7 +75,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "左航 cut",
     "poster": "images/stage-06.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/Ba60QHZ"
   },
   "land": {
@@ -88,7 +88,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "左航 cut · 舞台篇",
     "poster": "images/stage-07.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/UzyHZcL"
   },
   "butterfly-effect": {
@@ -101,7 +101,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "演唱会合集",
     "poster": "images/stage-08.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/k4gu9Uc"
   },
   "born-in-flames": {
@@ -114,7 +114,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "全程回顾 · A+B 合集",
     "poster": "images/stage-09.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/qvISsb9"
   },
   "all-in": {
@@ -127,7 +127,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "舞台合集",
     "poster": "images/stage-10.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/NkyXeGN"
   },
   "bloom": {
@@ -140,7 +140,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "左航 · 舞台篇",
     "poster": "images/stage-11.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videos": [
       {
         "label": "DAY1 · 上半场",
@@ -170,7 +170,7 @@ window.LEFT_STAGE_ARCHIVES = {
     "artist": "LEFT / 左航",
     "videoLabel": "《登陆时刻》8.26 · 左航舞台合集",
     "poster": "images/stage-12.png",
-    "returnUrl": "changjiang-umbrella.html",
+    "returnUrl": "changjiang.html",
     "videoUrl": "https://b23.tv/Fcg3Qn5"
   }
 };

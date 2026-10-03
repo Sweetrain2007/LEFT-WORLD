@@ -43,6 +43,11 @@
     [...controls.children].filter(n => n !== original).forEach(n => n.setAttribute("aria-hidden", "true"));
     original.replaceWith(button); button.addEventListener("click", open);
   });
+  const mobileBack = document.querySelector(".mobile-chat .mobile-back");
+  mobileBack?.addEventListener("click", event => {
+    event.preventDefault();
+    open();
+  });
   leave.addEventListener("click", () => {
     if (navigating) return;
     navigating = true; stopTyping(); leave.disabled = close.disabled = true; document.body.classList.add("chat-exiting");

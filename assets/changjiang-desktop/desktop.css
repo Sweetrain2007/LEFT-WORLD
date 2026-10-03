@@ -1,0 +1,23 @@
+
+.desktop-scroll{width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.changjiang-desktop{position:relative;width:100%;margin:0 auto}
+.desktop-background{display:block;width:100%;height:auto}
+.folder-overlay{position:absolute;inset:0}
+.stage-folder{position:absolute;left:var(--desktop-x);top:var(--desktop-y);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;width:108px;min-height:66px;text-align:center;text-decoration:none;text-shadow:none;cursor:pointer}
+.stage-folder img{display:block;width:58px;height:48px;transition:filter .15s}
+.stage-folder span{display:block;max-width:108px;margin-top:3px;padding:1px 3px;font:11px/1.35 Arial,"Microsoft YaHei",sans-serif;color:#24374a;text-shadow:0 1px 1px #fff;overflow-wrap:anywhere}
+.stage-folder:hover img{filter:brightness(1.06)}
+.stage-folder:hover span,.stage-folder:focus-visible span{background:#cce5f4;color:#163653;text-shadow:none}
+.stage-folder:focus-visible{outline:1px dotted #557c9c;outline-offset:1px}
+@media(max-width:700px){.changjiang-desktop{width:640px}.stage-folder{left:var(--mobile-x);top:var(--mobile-y);width:100px;min-height:64px}.stage-folder img{width:52px;height:44px}.stage-folder span{font-size:10px}.desktop-scroll{margin-top:0}.story-space p{line-height:1.7}}
+@media(prefers-reduced-motion:reduce){.stage-folder img{transition:none}}
+
+/* Compact tear trail: keep every file inside the unchanged photo. */
+.stage-folder{width:76px;min-height:38px}
+.stage-folder img{width:34px;height:28px}
+.stage-folder span{max-width:76px;margin-top:1px;font-size:9px;line-height:1.15}
+@media(max-width:700px){.stage-folder{width:60px;min-height:30px}.stage-folder img{width:24px;height:20px}.stage-folder span{max-width:60px;font-size:8px;line-height:1.1}}
+
+/* Quote overlays the photo, without adding a separate layout row. */
+.story-space .desktop-quote{position:absolute;top:18px;left:20px;margin:0;z-index:1;color:#687582;text-shadow:none;pointer-events:none}
+@media(max-width:700px){.story-space .desktop-quote{top:12px;left:calc(50% - (100vw - 40px)/2 + 12px);max-width:calc(100vw - 64px);font-size:11px}}
