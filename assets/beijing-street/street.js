@@ -97,5 +97,13 @@
   }
   new ResizeObserver(sizeHitAreas).observe(art);
   addEventListener("resize",sizeHitAreas); sizeHitAreas();
-  addEventListener("pageshow",()=>{entering=false;document.body.classList.remove("entering");layer.querySelectorAll(".is-selected").forEach(n=>n.classList.remove("is-selected"));});
+  addEventListener("pageshow",()=>{
+    entering=false;document.body.classList.remove("entering");
+    layer.querySelectorAll(".is-selected").forEach(n=>n.classList.remove("is-selected"));
+    if (matchMedia("(hover:none), (pointer:coarse)").matches) {
+      hidePreview();
+      if (document.activeElement?.matches(".cell-hit")) document.activeElement.blur();
+      requestAnimationFrame(sizeHitAreas);
+    }
+  });
 })();

@@ -75,6 +75,10 @@ const beijingStages = [
       "url": "https://b23.tv/qb5sIIh"
     },
     {
+      "title": "【披荆斩棘三公】《不如跳舞》KnowKnow/沙一汀EL/TOP登陆少年朱志鑫/TOP登陆少年左航",
+      "url": "https://b23.tv/z6OzUUl"
+    },
+    {
       "title": "【披荆斩棘四公】MC HOTDOG热狗/周柏豪/TOP登陆少年左航《秘密》",
       "url": "https://b23.tv/TCWR3j7"
     },

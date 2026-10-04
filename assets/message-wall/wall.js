@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  const FLOWER_ASSET = "assets/message-wall/forget-me-not.png";
+  const FLOWER_ASSET = "assets/message-wall/forget-me-not-web.webp";
   const store = window.LEFT_MESSAGE_STORE;
   const dialog = document.getElementById("note-dialog"), form = document.getElementById("note-form");
   const text = document.getElementById("note-text"), sky = document.getElementById("sky");

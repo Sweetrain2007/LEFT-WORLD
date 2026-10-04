@@ -12,14 +12,14 @@
 <body>
 <main id="intro" class="intro">
   <div id="computer" class="computer">
-    <img class="computer-image" src="assets/intro/computer.png" width="1318" height="1193" alt="LEFT 银色 Y2K 电脑" draggable="false">
+    <img class="computer-image" src="assets/intro/computer-web.webp" width="1318" height="1193" alt="LEFT 银色 Y2K 电脑" draggable="false">
     <button id="screen-button" class="screen-button" type="button" aria-label="点击电脑屏幕，进入开屏"></button>
   </div>
 </main>
 <div id="media-layer" class="media-layer" aria-hidden="true">
   <img id="screen-fallback" src="assets/intro/screen-fallback.webp" alt="">
   <video id="flicker-video" autoplay muted playsinline loop preload="auto" disablepictureinpicture></video>
-  <video id="intro-video" muted playsinline preload="auto" disablepictureinpicture></video>
+  <video id="intro-video" muted playsinline preload="none" disablepictureinpicture></video>
   <canvas id="last-frame" hidden></canvas>
 </div>
 <section id="welcome-screen" class="welcome-screen" aria-label="Welcome" hidden>

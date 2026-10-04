@@ -100,6 +100,7 @@
   }
   function useStatic() {
     if(staticMode || state === "idle" || state === "entering")return;
+    keepFrame();
     staticMode = true;
     document.body.dataset.playbackMode = "static-fallback";
     clearTimeout(watchdog); stopTracking();
@@ -125,7 +126,8 @@
   $("screen-fallback").src=c.screenFallback;
   flicker.poster=movie.poster=c.screenFallback;
   flicker.src = c.flickerVideo;
-  movie.src = c.introVideo;
+  // Load the main movie only on the screen gesture, preserving iOS playback permission.
+  movie.preload = "none";
   movie.loop = false;
   function place(rect) {
     Object.assign(layer.style,{left:rect.left+"px",top:rect.top+"px",width:rect.width+"px",height:rect.height+"px"});
@@ -156,7 +158,7 @@
     tracking=true;
     function frame() {
       if(!tracking)return;
-      keepFrame();checkTypingTime();
+      checkTypingTime();
       if(movie.ended || movie.paused || state === "entering"){tracking=false;return;}
       if(movie.requestVideoFrameCallback)videoFrame=movie.requestVideoFrameCallback(frame);
       else polling=requestAnimationFrame(frame);
@@ -224,6 +226,7 @@
     screen.disabled=true;
     // Synchronous calls within the screen gesture, before any timer or await.
     play(flicker,()=>{});
+    if (!movie.getAttribute("src")) movie.src = c.introVideo;
     play(movie,useStatic);
     armWatchdog();
     const rect = screenRect(), model = computer.getBoundingClientRect();

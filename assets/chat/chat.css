@@ -1,6 +1,6 @@
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;color:#24364b;font:12px Tahoma,"SimSun","宋体",sans-serif}
-body{background:#b7c9de url("sky-background.jpg") center/cover no-repeat fixed}
+body{background:#b7c9de url("sky-background-web.webp") center/cover no-repeat fixed}
 button,textarea{font:inherit}button{color:inherit}
 .icon-definitions{position:absolute;width:0;height:0;overflow:hidden}
 .desktop{min-height:100svh;min-width:960px;display:flex;align-items:center;justify-content:center;padding:36px 28px}

@@ -1,5 +1,5 @@
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;width:100%}
-body{min-height:100vh;background:#83a7c3 url("background.jpg") center/cover no-repeat fixed;color:#fff;font-family:"Microsoft YaHei Light","Microsoft YaHei",sans-serif}
+body{min-height:100vh;background:#83a7c3 url("background-web.webp") center/cover no-repeat fixed;color:#fff;font-family:"Microsoft YaHei Light","Microsoft YaHei",sans-serif}
 @font-face{font-family:"Weddingday";src:url("../../fonts/WeddingdayPersonalUseRegular-1Gvo0.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
 .beijing-header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px;flex-wrap:wrap}.beijing-brand{font-family:"Weddingday",Georgia,serif;font-size:24px;margin:0}
 a{color:#fff;text-underline-offset:5px;font-size:14px}a:focus-visible{outline:2px solid currentColor;outline-offset:6px}
@@ -28,5 +28,5 @@ body.entering .street-art{transition:transform 1s cubic-bezier(.3,.05,.25,1);tra
 .window-preview{position:fixed;z-index:4;max-width:min(250px,calc(100vw - 20px));padding:7px 10px;border:1px solid #ddceaa33;background:#293c48d9;color:#fff4d9;font-size:12px;line-height:1.6;pointer-events:none;visibility:hidden;opacity:0;transform:translateY(3px);transition:opacity 160ms,transform 160ms,visibility 160ms;overflow-wrap:anywhere}
 .window-preview.is-visible{visibility:visible;opacity:1;transform:translateY(0)}
 .window-preview-date{margin-top:3px;font-size:10px;color:#ded3bd}
-@media(hover:none),(pointer:coarse){.window-preview{display:none}}
+@media(hover:none),(pointer:coarse){.window-preview{display:none}.cell-hit{-webkit-tap-highlight-color:transparent}}
 @media(prefers-reduced-motion:reduce){.window-preview{transition:none;transform:none}}

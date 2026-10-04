@@ -832,5 +832,5 @@ const memorySpreads = [
   }
 ];
 
-window.QIJIANG_ALBUM = {memorySpreads, cover:"assets/qijiang-album/p1-cover.png", pages:"assets/qijiang-album/p2-pages.png", flipDuration:850};
+window.QIJIANG_ALBUM = {memorySpreads, cover:"assets/qijiang-album/p1-cover-web.webp", pages:"assets/qijiang-album/p2-pages-web.webp", flipDuration:850};
 

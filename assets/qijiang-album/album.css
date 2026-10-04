@@ -17,7 +17,7 @@
 .qa-item:focus-visible{outline:2px dashed #2b4a65;outline-offset:5px}
 .qa-print{position:absolute;inset:0;padding:2%;background:#f9f8f2;box-shadow:1px 3px 5px #30352e40;display:block}
 .qa-print>img,.qa-print>video{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
-.qa-tape{position:absolute;width:48%;aspect-ratio:1280/230;top:-7%;left:26%;background-image:url("tapes.png");background-size:100% auto;background-repeat:no-repeat;opacity:.87;transform:rotate(-5deg);pointer-events:none;filter:drop-shadow(0 1px 1px #26302720)}
+.qa-tape{position:absolute;width:48%;aspect-ratio:1280/230;top:-7%;left:26%;background-image:url("tapes-web.webp");background-size:100% auto;background-repeat:no-repeat;opacity:.87;transform:rotate(-5deg);pointer-events:none;filter:drop-shadow(0 1px 1px #26302720)}
 .qa-tape[data-style="cream"]{background-position:50% 13.8%}
 .qa-tape[data-style="blueStripe"]{background-position:50% 39%}
 .qa-tape[data-style="yellow"]{background-position:50% 64.3%}
