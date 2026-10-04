@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LEFT's World</title>
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#e3f2fd url("images/home-background.jpg") center / cover no-repeat fixed;color:#102c60;font-family:Arial,"Microsoft YaHei",sans-serif}h1{margin:0;padding:24px;font-size:24px;line-height:1.4}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#07367c url("images/music-sky-hands.jpg") center / cover no-repeat;color:#102c60;font-family:Arial,"Microsoft YaHei",sans-serif}h1{margin:0;padding:24px;font-size:24px;line-height:1.4}
 /* 图标位于路线图下方，水平居中排列。 */
 .icon-menu{position:relative;margin:12px auto 64px;width:min(1120px,calc(100% - 40px));display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,7vw,100px)}
 .icon-link{display:grid;place-items:center;min-height:60px;border-radius:18px;text-decoration:none;transition:transform 200ms ease}
@@ -9,14 +9,8 @@
 .icon-link:hover{transform:translateY(-6px)}.icon-link:focus-visible{outline:2px solid #345b91;outline-offset:8px}
 @media(prefers-reduced-motion:reduce){.icon-link{transition:none}.icon-link:hover{transform:none}}
 
-/* 轻柔细雨：不拦截点击，位于标题和图标后方。 */
-.rain{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 body>h1{position:relative;z-index:1}
 .icon-menu{z-index:1}
-.rain-drop{position:absolute;top:-52px;left:var(--x);width:3px;height:calc(var(--length) * 2.4);border-radius:999px;background:linear-gradient(to bottom,transparent,rgba(74,125,175,.6));opacity:var(--alpha);animation:drizzle var(--speed) linear var(--delay) infinite;will-change:transform}
-@keyframes drizzle{from{transform:translate3d(12px,-24px,0)}to{transform:translate3d(-18px,calc(100vh + 56px),0)}}
-@media(max-width:600px){.rain-drop:nth-child(n+23){display:none}}
-@media(prefers-reduced-motion:reduce){.rain{display:none}.rain-drop{animation:none}}
 /* 网站名称使用 Weddingday，其他文字保留原字体。 */
 @font-face{font-family:"Weddingday";src:url("fonts/WeddingdayPersonalUseRegular-1Gvo0.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
 .site-brand,.brand{font-family:"Weddingday",Georgia,serif;font-weight:400}
@@ -173,233 +167,31 @@ html{scroll-behavior:smooth}
 @keyframes earphones-appear{from{opacity:0}to{opacity:1}}
 @media(max-width:360px){.player-assembly{width:calc(100vw - 80px)}}
 @media(prefers-reduced-motion:reduce){.player-earphones{animation:none!important;transition:none!important;transform:none!important;opacity:1!important}}
-</style></head><body><div class="rain" aria-hidden="true">
-  <span class="rain-drop" style="--x:0.00%;--length:10px;--alpha:0.25;--speed:2.5s;--delay:-0.00s"></span>
-  <span class="rain-drop" style="--x:61.80%;--length:17px;--alpha:0.38;--speed:4.2s;--delay:-0.73s"></span>
-  <span class="rain-drop" style="--x:23.61%;--length:14px;--alpha:0.31;--speed:3.9s;--delay:-1.46s"></span>
-  <span class="rain-drop" style="--x:85.41%;--length:11px;--alpha:0.44;--speed:3.6s;--delay:-2.19s"></span>
-  <span class="rain-drop" style="--x:47.21%;--length:18px;--alpha:0.37;--speed:3.3s;--delay:-2.92s"></span>
-  <span class="rain-drop" style="--x:9.01%;--length:15px;--alpha:0.30;--speed:3.0s;--delay:-3.65s"></span>
-  <span class="rain-drop" style="--x:70.82%;--length:12px;--alpha:0.43;--speed:2.7s;--delay:-4.38s"></span>
-  <span class="rain-drop" style="--x:32.62%;--length:19px;--alpha:0.36;--speed:4.4s;--delay:-0.11s"></span>
-  <span class="rain-drop" style="--x:94.42%;--length:16px;--alpha:0.29;--speed:4.1s;--delay:-0.84s"></span>
-  <span class="rain-drop" style="--x:56.23%;--length:13px;--alpha:0.42;--speed:3.8s;--delay:-1.57s"></span>
-  <span class="rain-drop" style="--x:18.03%;--length:10px;--alpha:0.35;--speed:3.5s;--delay:-2.30s"></span>
-  <span class="rain-drop" style="--x:79.83%;--length:17px;--alpha:0.28;--speed:3.2s;--delay:-3.03s"></span>
-  <span class="rain-drop" style="--x:41.64%;--length:14px;--alpha:0.41;--speed:2.9s;--delay:-3.76s"></span>
-  <span class="rain-drop" style="--x:3.44%;--length:11px;--alpha:0.34;--speed:2.6s;--delay:-4.49s"></span>
-  <span class="rain-drop" style="--x:65.24%;--length:18px;--alpha:0.27;--speed:4.3s;--delay:-0.22s"></span>
-  <span class="rain-drop" style="--x:27.04%;--length:15px;--alpha:0.40;--speed:4.0s;--delay:-0.95s"></span>
-  <span class="rain-drop" style="--x:88.85%;--length:12px;--alpha:0.33;--speed:3.7s;--delay:-1.68s"></span>
-  <span class="rain-drop" style="--x:50.65%;--length:19px;--alpha:0.26;--speed:3.4s;--delay:-2.41s"></span>
-  <span class="rain-drop" style="--x:12.45%;--length:16px;--alpha:0.39;--speed:3.1s;--delay:-3.14s"></span>
-  <span class="rain-drop" style="--x:74.26%;--length:13px;--alpha:0.32;--speed:2.8s;--delay:-3.87s"></span>
-  <span class="rain-drop" style="--x:36.06%;--length:10px;--alpha:0.25;--speed:2.5s;--delay:-4.60s"></span>
-  <span class="rain-drop" style="--x:97.86%;--length:17px;--alpha:0.38;--speed:4.2s;--delay:-0.33s"></span>
-  <span class="rain-drop" style="--x:59.67%;--length:14px;--alpha:0.31;--speed:3.9s;--delay:-1.06s"></span>
-  <span class="rain-drop" style="--x:21.47%;--length:11px;--alpha:0.44;--speed:3.6s;--delay:-1.79s"></span>
-  <span class="rain-drop" style="--x:83.27%;--length:18px;--alpha:0.37;--speed:3.3s;--delay:-2.52s"></span>
-  <span class="rain-drop" style="--x:45.07%;--length:15px;--alpha:0.30;--speed:3.0s;--delay:-3.25s"></span>
-  <span class="rain-drop" style="--x:6.88%;--length:12px;--alpha:0.43;--speed:2.7s;--delay:-3.98s"></span>
-  <span class="rain-drop" style="--x:68.68%;--length:19px;--alpha:0.36;--speed:4.4s;--delay:-4.71s"></span>
-  <span class="rain-drop" style="--x:30.48%;--length:16px;--alpha:0.29;--speed:4.1s;--delay:-0.44s"></span>
-  <span class="rain-drop" style="--x:92.29%;--length:13px;--alpha:0.42;--speed:3.8s;--delay:-1.17s"></span>
-  <span class="rain-drop" style="--x:54.09%;--length:10px;--alpha:0.35;--speed:3.5s;--delay:-1.90s"></span>
-  <span class="rain-drop" style="--x:15.89%;--length:17px;--alpha:0.28;--speed:3.2s;--delay:-2.63s"></span>
-  <span class="rain-drop" style="--x:77.70%;--length:14px;--alpha:0.41;--speed:2.9s;--delay:-3.36s"></span>
-  <span class="rain-drop" style="--x:39.50%;--length:11px;--alpha:0.34;--speed:2.6s;--delay:-4.09s"></span>
-  <span class="rain-drop" style="--x:1.30%;--length:18px;--alpha:0.27;--speed:4.3s;--delay:-4.82s"></span>
-  <span class="rain-drop" style="--x:63.11%;--length:15px;--alpha:0.40;--speed:4.0s;--delay:-0.55s"></span>
-  <span class="rain-drop" style="--x:24.91%;--length:12px;--alpha:0.33;--speed:3.7s;--delay:-1.28s"></span>
-  <span class="rain-drop" style="--x:86.71%;--length:19px;--alpha:0.26;--speed:3.4s;--delay:-2.01s"></span>
-</div>
-<section class="icons-screen" id="works" aria-label="舞台选择">
+/* Fit the existing player into the viewport, slightly above its center. */
+.icons-screen{height:100dvh;min-height:0;padding:64px 20px 104px}
+.player-assembly{width:min(320px,calc(100vw - 96px),calc((100dvh - 168px) * 320 / 540));flex-shrink:0}
+@media(max-width:360px){.player-assembly{width:min(calc(100vw - 80px),calc((100dvh - 168px) * 320 / 540))}}
+/* Anchor the player to the light in the proportionally scaled background. */
+.icons-screen{padding:0}
+.player-assembly{position:absolute;left:calc(50% - max(1vw,1.777dvh));top:calc(50% + max(4dvh,2.251vw));transform:translate(-50%,-50%)}
+</style></head><body><section class="icons-screen" id="works" aria-label="舞台选择">
 <div class="player-assembly"><img class="player-earphones" src="images/player-earphones-layout.svg" alt="" aria-hidden="true" draggable="false" width="500" height="1000">
 <div class="player-shell" aria-label="数码随身听" tabindex="0">
 <div class="player-screen">
 <div class="status-bar" aria-hidden="true"><span>▶ MUSIC</span><span class="player-status-right"><span class="player-counter">01/04</span> <i class="player-battery"></i></span></div>
 <nav class="icon-menu stage-list" aria-label="主页导航"><span class="selection-bar" aria-hidden="true"></span>
-<a class="icon-link stage-row is-selected" href="left.html" aria-label="进入Left页面"><img src="images/icon-left.png" alt="Left"><span class="stage-number" aria-hidden="true">01</span><span class="stage-chevron" aria-hidden="true">&gt;</span></a>
-<a class="icon-link stage-row" href="right.html" aria-label="进入Right页面"><img src="images/icon-right.png" alt="Right"><span class="stage-number" aria-hidden="true">02</span><span class="stage-chevron" aria-hidden="true">&gt;</span></a>
-<a class="icon-link stage-row" href="flowers.html" aria-label="进入蓝花页面"><img src="images/icon-flowers.png" alt="蓝花"><span class="stage-number" aria-hidden="true">03</span><span class="stage-chevron" aria-hidden="true">&gt;</span></a>
-<a class="icon-link stage-row" href="ring.html" aria-label="进入就是爱你页面"><img src="images/icon-blue-bottle.png" alt="蓝色玻璃瓶"><span class="stage-number" aria-hidden="true">04</span><span class="stage-chevron" aria-hidden="true">&gt;</span></a>
 </nav>
 </div>
 <div class="control-wheel" role="group" aria-label="歌单控制">
 <span class="wheel-menu">MENU</span>
-<button type="button" class="wheel-prev" aria-label="上一项">|◀</button><button type="button" class="wheel-next" aria-label="下一项">▶|</button>
+<button type="button" class="wheel-prev" aria-label="上一页歌单">|◀</button><button type="button" class="wheel-next" aria-label="下一页歌单">▶|</button>
 <button type="button" class="wheel-play" aria-label="进入当前舞台">▶Ⅱ</button><button type="button" class="wheel-center" aria-label="确认当前舞台"></button>
 </div>
 </div>
 </div>
 <a class="back-link" href="home.html" data-chat-return aria-label="返回聊天主页">back</a>
 </section>
-<script>
-(function () {
-  const section = document.getElementById("works");
-  const shell = section.querySelector(".player-shell");
-  const earphones = section.querySelector(".player-earphones");
-  const list = shell.querySelector(".stage-list");
-  const rows = Array.from(list.querySelectorAll(".stage-row"));
-  const bar = list.querySelector(".selection-bar");
-  const counter = shell.querySelector(".player-counter");
-  const motion = matchMedia("(prefers-reduced-motion: reduce)");
-  const storageKey = "left-stage-player-active-index";
-  const entryUrl = new URL(location.href);
-  let musicView = entryUrl.searchParams.get("view") === "player" ||
-    (history.state && history.state.musicView === "player") ? "player" : "intro";
-  // Consume the return marker; only this history entry remembers the view.
-  entryUrl.searchParams.delete("view");
-  history.replaceState({...history.state, musicView}, "", entryUrl.href);
-  section.dataset.musicView = musicView;
-  function rememberPlayer() {
-    musicView = "player";
-    section.dataset.musicView = musicView;
-    history.replaceState({...history.state, musicView}, "");
-  }
-  let activeIndex = 0, confirming = false, nativeNavigation = false;
-  let confirmTimer, entranceTimer, counterAnimation, pointerFrame;
-  function storedIndex() {
-    try {
-      const value = Number(sessionStorage.getItem(storageKey));
-      return Number.isInteger(value) && value >= 0 && value < rows.length ? value : 0;
-    } catch (_) { return activeIndex; }
-  }
-  function positionBar() {
-    bar.style.height = rows[activeIndex].offsetHeight + "px";
-    bar.style.transform = "translateY(" + rows[activeIndex].offsetTop + "px)";
-  }
-  function select(index, animate = true) {
-    if (confirming) return;
-    const next = (index + rows.length) % rows.length;
-    const changed = next !== activeIndex;
-    activeIndex = next;
-    rows.forEach((row, i) => {
-      row.classList.toggle("is-selected", i === activeIndex);
-      if (i === activeIndex) row.setAttribute("aria-current", "true");
-      else row.removeAttribute("aria-current");
-    });
-    counter.textContent = String(activeIndex + 1).padStart(2, "0") + "/04";
-    if (changed && animate && !motion.matches && counter.animate) {
-      if (counterAnimation) counterAnimation.cancel();
-      counterAnimation = counter.animate([{opacity:.65},{opacity:1}], {duration:140,easing:"ease-out"});
-    }
-    positionBar();
-    try { sessionStorage.setItem(storageKey, String(activeIndex)); } catch (_) {}
-  }
-  function enter() {
-    if (confirming) return;
-    clearTimeout(entranceTimer);
-    shell.classList.remove("player-arriving", "player-pending");
-    rememberPlayer();
-    confirming = true;
-    const target = rows[activeIndex];
-    shell.classList.add("player-confirming");
-    confirmTimer = setTimeout(() => {
-      // Dispatch through the original anchor; its href remains the navigation source.
-      nativeNavigation = true;
-      try { target.click(); }
-      finally { nativeNavigation = false; }
-      confirming = false;
-      shell.classList.remove("player-confirming");
-    }, motion.matches ? 0 : 250);
-  }
-  rows.forEach((row, index) => {
-    row.style.setProperty("--row-index", index);
-    row.addEventListener("pointerenter", () => select(index));
-    row.addEventListener("focus", () => select(index));
-    row.addEventListener("click", event => {
-      if (nativeNavigation) return;
-      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-        select(index);
-        return;
-      }
-      event.preventDefault();
-      if (confirming) return;
-      select(index);
-      enter();
-    });
-  });
-  shell.querySelector(".wheel-prev").addEventListener("click", () => select(activeIndex - 1));
-  shell.querySelector(".wheel-next").addEventListener("click", () => select(activeIndex + 1));
-  shell.querySelector(".wheel-center").addEventListener("click", enter);
-  shell.querySelector(".wheel-play").addEventListener("click", enter);
-  document.addEventListener("keydown", event => {
-    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
-    if (!["ArrowUp","ArrowDown","Enter"].includes(event.key)) return;
-    const focused = document.activeElement;
-    if (focused && focused !== document.body && !shell.contains(focused)) return;
-    const rect = shell.getBoundingClientRect();
-    if (rect.bottom <= 0 || rect.top >= innerHeight) return;
-    event.preventDefault();
-    if (event.repeat && event.key === "Enter") return;
-    if (event.key === "ArrowUp") select(activeIndex - 1);
-    else if (event.key === "ArrowDown") select(activeIndex + 1);
-    else enter();
-  });
-  function resetTilt() {
-    cancelAnimationFrame(pointerFrame);
-    shell.style.setProperty("--tilt-x", "0deg");
-    shell.style.setProperty("--tilt-y", "0deg");
-    earphones.style.setProperty("--wire-x", "0px");
-    earphones.style.setProperty("--wire-y", "0px");
-  }
-  section.addEventListener("pointermove", event => {
-    if (motion.matches || event.pointerType !== "mouse") return;
-    cancelAnimationFrame(pointerFrame);
-    pointerFrame = requestAnimationFrame(() => {
-      const rect = shell.getBoundingClientRect();
-      const x = (event.clientX - rect.left - rect.width / 2) / (rect.width / 2 + 100);
-      const y = (event.clientY - rect.top - rect.height / 2) / (rect.height / 2 + 100);
-      if (Math.abs(x) > 1 || Math.abs(y) > 1) { resetTilt(); return; }
-      shell.style.setProperty("--tilt-x", (-y).toFixed(3) + "deg");
-      shell.style.setProperty("--tilt-y", (x * 1.5).toFixed(3) + "deg");
-      earphones.style.setProperty("--wire-x", (x * 1.5).toFixed(3) + "px");
-      earphones.style.setProperty("--wire-y", (y * 1.2).toFixed(3) + "px");
-    });
-  });
-  section.addEventListener("pointerleave", resetTilt);
-  function arrive() {
-    if (musicView === "player") {
-      shell.classList.remove("player-pending", "player-arriving");
-      return;
-    }
-    rememberPlayer();
-    shell.classList.remove("player-pending");
-    if (!motion.matches) {
-      shell.classList.add("player-arriving");
-      entranceTimer = setTimeout(() => shell.classList.remove("player-arriving"), 1100);
-    }
-  }
-  select(storedIndex(), false);
-  if ("ResizeObserver" in window) new ResizeObserver(positionBar).observe(list);
-  else window.addEventListener("resize", positionBar);
-  if (musicView === "intro" && !motion.matches && "IntersectionObserver" in window) {
-    shell.classList.add("player-pending");
-    const observer = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) { arrive(); observer.disconnect(); }
-    }, {threshold:.15});
-    observer.observe(shell);
-  } else arrive();
-  motion.addEventListener("change", () => {
-    if (motion.matches) {
-      clearTimeout(entranceTimer);
-      shell.classList.remove("player-pending", "player-arriving");
-      resetTilt();
-      if (counterAnimation) counterAnimation.cancel();
-    }
-  });
-  window.addEventListener("pageshow", event => {
-    if (!event.persisted) return;
-    rememberPlayer();
-    clearTimeout(confirmTimer);
-    clearTimeout(entranceTimer);
-    confirming = false;
-    shell.classList.remove("player-confirming", "player-pending", "player-arriving");
-    resetTilt();
-    select(storedIndex(), false);
-  });
-})();
-</script>
+<script src="assets/walkman/songs.js"></script>
+<script src="assets/walkman/player.js"></script>
 <script defer src="assets/chat/return-to-chat.js"></script>
 </body></html>
