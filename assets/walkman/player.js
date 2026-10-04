@@ -211,5 +211,8 @@
   section.querySelector("[data-chat-return]").addEventListener("click", () => {
     try { sessionStorage.removeItem(storageKey); } catch (_) {}
   });
-  window.addEventListener("pagehide", () => { clearTimeout(confirmTimer); pageAnimation?.cancel(); resetTilt(); });
+  window.addEventListener("pagehide", () => {
+    clearTimeout(confirmTimer); clearTimeout(entranceTimer);
+    pageAnimation?.cancel(); counterAnimation?.cancel(); resetTilt();
+  });
 })();

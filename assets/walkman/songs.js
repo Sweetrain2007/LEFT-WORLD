@@ -5,7 +5,7 @@ const walkmanSongs = [
     "id": "hey-left",
     "stageId": "left",
     "route": "left.html",
-    "icon": "images/icon-left.png",
+    "icon": "images/icon-left-web.webp",
     "label": "进入Left页面",
     "alt": "Left"
   },
@@ -13,7 +13,7 @@ const walkmanSongs = [
     "id": "pei-zhe-ni-zou",
     "stageId": "pei-zhe-ni-zou",
     "route": "pei-zhe-ni-zou.html",
-    "icon": "images/icon-pei-zhe-ni-zou.png",
+    "icon": "images/icon-pei-zhe-ni-zou-web.webp",
     "label": "进入陪着你走舞台",
     "alt": "陪着你走"
   },
@@ -21,7 +21,7 @@ const walkmanSongs = [
     "id": "sorry",
     "stageId": "sorry",
     "route": "sorry.html",
-    "icon": "images/icon-sorry.png",
+    "icon": "images/icon-sorry-web.webp",
     "label": "进入sorry舞台",
     "alt": "sorry"
   },
@@ -29,7 +29,7 @@ const walkmanSongs = [
     "id": "xiang-yi-wei-ming",
     "stageId": "right",
     "route": "right.html",
-    "icon": "images/icon-right.png",
+    "icon": "images/icon-right-web.webp",
     "label": "进入Right页面",
     "alt": "Right"
   },
@@ -37,7 +37,7 @@ const walkmanSongs = [
     "id": "crown-stage",
     "stageId": "crown",
     "route": "crown.html",
-    "icon": "images/icon-crown.png",
+    "icon": "images/icon-crown-web.webp",
     "label": "进入皇冠舞台",
     "alt": "皇冠"
   },
@@ -45,7 +45,7 @@ const walkmanSongs = [
     "id": "you-he-bu-ke",
     "stageId": "flowers",
     "route": "flowers.html",
-    "icon": "images/icon-flowers.png",
+    "icon": "images/icon-flowers-web.webp",
     "label": "进入蓝花页面",
     "alt": "蓝花"
   },
@@ -53,7 +53,7 @@ const walkmanSongs = [
     "id": "jiu-shi-ai-ni",
     "stageId": "ring",
     "route": "ring.html",
-    "icon": "images/icon-blue-bottle.png",
+    "icon": "images/icon-blue-bottle-web.webp",
     "label": "进入就是爱你页面",
     "alt": "蓝色玻璃瓶"
   },
@@ -61,7 +61,7 @@ const walkmanSongs = [
     "id": "shap-of-you",
     "stageId": "shap-of-you",
     "route": "shap-of-you.html",
-    "icon": "images/icon-shap-of-you.png",
+    "icon": "images/icon-shap-of-you-web.webp",
     "label": "进入shap of you舞台",
     "alt": "shap of you"
   }

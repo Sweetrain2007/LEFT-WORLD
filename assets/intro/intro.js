@@ -273,7 +273,12 @@
   });
   flicker.addEventListener("pause", () => {
     document.body.dataset.flickerStatus = "paused";
-    if(state === "idle") fallback.style.opacity = "1";
+    if(state === "idle") {
+      fallback.style.opacity = "1";
+      // Recover a browser-restored pause only in the visible idle screen.
+      // A failed play does not emit pause, so this is not a retry loop.
+      requestAnimationFrame(() => retryIdleFlicker("idle-pause"));
+    }
   });
   flicker.addEventListener("error",()=>{
     document.body.dataset.flickerMediaError = String(flicker.error?.code || "unknown");
@@ -344,7 +349,7 @@
     if(typingStarted && typedCount < characters.length)typingTimer=setTimeout(typeNext,c.typingSpeed);
     else if(typingStarted)cursor.hidden=true;
     if(staticMode){clearTimeout(staticTimer);staticTimer=setTimeout(staticWelcome,0);return;}
-    if(state === "idle")play(flicker,autoRejected);
+    if(state === "idle"){place(screenRect());play(flicker,autoRejected);}
     else if(!movieStarted && moviePrimed) {
       if(state === "zooming")play(flicker,()=>{});
       movieReady();armWatchdog();
