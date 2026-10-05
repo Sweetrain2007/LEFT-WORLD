@@ -55,4 +55,40 @@ const leftVoiceLibrary = [
     "src": "assets/chat/audio/voice-11.m4a",
     "duration": null
   }
+,
+{
+  "id": "voice-12",
+  "src": "assets/chat/audio/voice-12.m4a",
+  "duration": 4.541678
+},
+{
+  "id": "voice-13",
+  "src": "assets/chat/audio/voice-13.m4a",
+  "duration": 3.33
+},
+{
+  "id": "voice-14",
+  "src": "assets/chat/audio/voice-14.m4a",
+  "duration": 2.528333
+},
+{
+  "id": "voice-15",
+  "src": "assets/chat/audio/voice-15.m4a",
+  "duration": 3.788345
+},
+{
+  "id": "voice-16",
+  "src": "assets/chat/audio/voice-16.m4a",
+  "duration": 1.508333
+},
+{
+  "id": "voice-17",
+  "src": "assets/chat/audio/voice-17.m4a",
+  "duration": 5.346667
+},
+{
+  "id": "voice-18",
+  "src": "assets/chat/audio/voice-18.m4a",
+  "duration": 4.746667
+}
 ];

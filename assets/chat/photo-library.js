@@ -53,4 +53,60 @@ const leftPhotoLibrary = [
   "src": "assets/chat/photos/photo-10.jpg",
   "text": "每日检查系统状态，今日状态:准备开始迎接酣畅淋漓的一段时间了。"
 }
+,
+{
+  "id": "photo-11",
+  "src": "assets/chat/photos/photo-11.jpg",
+  "text": "每日检查系统状态，今日状态:接着加油，接着训练，抓紧时间。"
+},
+{
+  "id": "photo-12",
+  "src": "assets/chat/photos/photo-12.jpg",
+  "text": "每日检查系统状态，今日状态:根据课表推断出今天是疯狂的一天哈哈哈。"
+},
+{
+  "id": "photo-13",
+  "src": "assets/chat/photos/photo-13.jpg",
+  "text": "每日检查系统状态，今日状态:安全抵达，要开始今天的训练了,let's go。"
+},
+{
+  "id": "photo-14",
+  "src": "assets/chat/photos/photo-14.jpg",
+  "text": "每日检查系统状态，今日状态:今天要和兄弟们登台演出!let's go!"
+},
+{
+  "id": "photo-15",
+  "src": "assets/chat/photos/photo-15.jpg",
+  "text": "每日检查系统状态，今日状态:撸起袖子加油干，大不了多吃两碗饭。"
+},
+{
+  "id": "photo-16",
+  "src": "assets/chat/photos/photo-16.jpg",
+  "text": "每日检查系统状态，今日状态:今天天气挺好，你们好不好。"
+},
+{
+  "id": "photo-17",
+  "src": "assets/chat/photos/photo-17.jpg",
+  "text": "每日检查系统状态，今日状态:每天都是极速记忆，大脑跟我发型一样混乱。"
+},
+{
+  "id": "photo-18",
+  "src": "assets/chat/photos/photo-18.jpg",
+  "text": "每日检查系统状态，今日状态:早上起来洗个头，发现有颗痘。"
+},
+{
+  "id": "photo-19",
+  "src": "assets/chat/photos/photo-19.jpg",
+  "text": "每日检查系统状态，今日状态:没太睡的醒🥲。"
+},
+{
+  "id": "photo-20",
+  "src": "assets/chat/photos/photo-20.jpg",
+  "text": "每日检查系统状态，今日状态:趁年轻，狠狠耍帅。😎"
+},
+{
+  "id": "photo-21",
+  "src": "assets/chat/photos/photo-21.jpg",
+  "text": "每日检查系统状态，今日状态:明天的我，会跟今天有点不一样，🐶"
+}
 ];
