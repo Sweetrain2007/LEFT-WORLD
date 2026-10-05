@@ -40,7 +40,7 @@ document.addEventListener("click",e=>{
  if(target.origin!==location.origin||!/\/route\.html$/.test(target.pathname))return;
  e.preventDefault();if(leaving)return;leaving=true;
  overlay("crt-departing");
- const image=new Image();image.src="assets/location/crt-computer-clean.png";
+ const image=new Image();image.src="assets/location/crt-computer-clean-web-optimized.webp";
  timer=setTimeout(()=>{
   try{sessionStorage.setItem(key,JSON.stringify({time:Date.now()}));}catch(_){}
   location.assign(target.href);
