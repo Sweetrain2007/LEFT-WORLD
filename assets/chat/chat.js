@@ -78,7 +78,11 @@
     if (Number.isFinite(message.duration) && message.duration > 0) { showDuration(message.src, message.duration); return; }
     if (metadataAudio.has(message.src)) return;
     const probe = new Audio(); metadataAudio.set(message.src, probe); probe.preload = "metadata";
-    probe.addEventListener("loadedmetadata", () => showDuration(message.src, probe.duration), {once:true});
+    function releaseProbe() {
+      probe.removeAttribute("src"); probe.load(); metadataAudio.delete(message.src);
+    }
+    probe.addEventListener("loadedmetadata", () => { showDuration(message.src, probe.duration); releaseProbe(); }, {once:true});
+    probe.addEventListener("error", releaseProbe, {once:true});
     probe.src = message.src;
   }
   const records = new Map();
@@ -247,6 +251,8 @@
     lastPhotoId = null;
     photoButtons.forEach(button => { button.disabled = false; button.removeAttribute("aria-busy"); });
     stopVoice();
+    metadataAudio.forEach(probe => { probe.removeAttribute("src"); probe.load(); });
+    metadataAudio.clear();
     voiceButtons.forEach(button => { button.disabled = false; button.removeAttribute("aria-busy"); });
     clearTimeout(firstTimer);
     pending.forEach(timer => clearTimeout(timer));

@@ -7,6 +7,7 @@
   const reader = document.getElementById("read-dialog"), status = document.getElementById("wall-status");
   const write = document.getElementById("write-message");
   let state = "idle", collectionToken = 0, collectionKind = "public", collectionPage = 0, retryDraft = null;
+  let sendingAnimations = [];
   const more = document.getElementById("load-more");
   function setState(next) { state = next; document.body.dataset.state = next; }
   function remaining() { document.getElementById("remaining").textContent = `还可写 ${500 - text.value.length} 字`; }
@@ -94,11 +95,20 @@
     const ui = form.querySelector(".paper-ui").animate([{opacity:1},{opacity:0,offset:.22},{opacity:0}],opts);
     const paper = form.animate([{transform:"translateY(0) scale(1)",opacity:1},{transform:"translateY(-16px) scale(.95)",opacity:1,offset:.18},{transform:"translateY(-26px) scale(.3,.2)",opacity:0,offset:.43},{transform:"translateY(-26px) scale(.3,.2)",opacity:0}],opts);
     const flight = flower.animate(reduced ? [{opacity:0,transform:`translate(${dx}px,${dy}px) scale(.086)`},{opacity:1,transform:`translate(${dx}px,${dy}px) scale(.086)`}] : [{opacity:0,transform:"translate(0,-26px) scale(.25)",offset:0},{opacity:0,transform:"translate(0,-26px) scale(.4)",offset:.24},{opacity:1,transform:"translate(0,-26px) scale(1)",offset:.43},{opacity:1,transform:"translate(0,-30px) scale(1)",offset:.52},{opacity:1,transform:`translate(${dx}px,${dy}px) scale(.086)`,offset:1}],opts);
-    await flight.finished;
-    addFlower(message); dialog.close(); flower.remove(); ui.cancel(); paper.cancel();
+    sendingAnimations = [ui, paper, flight];
+    try {
+      await flight.finished;
+    } catch (_) { /* Leaving the page can cancel the visual flight after the message was saved. */ }
+    finally {
+      addFlower(message); dialog.close(); flower.remove();
+      sendingAnimations.forEach(animation => animation.cancel()); sendingAnimations = [];
+    }
     form.reset(); remaining(); form.querySelectorAll("button,input,textarea").forEach(el => {el.disabled = false;});
     write.disabled = false; setState("idle"); write.focus();
     status.textContent = "勿忘我已留在夜空。小花通往公开留言，MY MESSAGES 收藏你的文字。";
+  });
+  window.addEventListener("pagehide", () => {
+    sendingAnimations.forEach(animation => animation.cancel());
   });
   openNote();
 })();
