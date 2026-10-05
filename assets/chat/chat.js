@@ -121,6 +121,9 @@
     if (records.has(message.id)) return;
     message = {...message, receivedAt: new Date()};
     records.set(message.id, message);
+    if (message.id === "intro") {
+      try { sessionStorage.setItem("left-chat-intro-time", message.receivedAt.toISOString()); } catch (_) {}
+    }
     lists.forEach(list => renderMessage(message, list, animate));
     if (animate) notify();
   }
@@ -258,9 +261,24 @@
     pending.forEach(timer => clearTimeout(timer));
     pending.clear();
     clearNotice();
+    const greeting = records.get("intro");
     records.clear();
-    lists.forEach(list => list.replaceChildren());
-    appendMessage(intro, false);
+    if (greeting) {
+      records.set("intro", greeting);
+      lists.forEach(list => {
+        [...list.children].forEach(row => { if (row.dataset.messageId !== "intro") row.remove(); });
+      });
+    } else {
+      lists.forEach(list => list.replaceChildren());
+      let receivedAt = new Date();
+      try {
+        const savedTime = sessionStorage.getItem("left-chat-intro-time");
+        if (savedTime && Number.isFinite(Date.parse(savedTime))) receivedAt = new Date(savedTime);
+      } catch (_) {}
+      const restoredGreeting = {...intro, receivedAt};
+      records.set("intro", restoredGreeting);
+      lists.forEach(list => renderMessage(restoredGreeting, list, false));
+    }
     buttons.forEach(button => {
       button.disabled = false;
       button.removeAttribute("aria-busy");
@@ -272,11 +290,11 @@
     // Only the base-greeting flag belongs to this history entry; shares stay in memory.
     let returning = false;
     try {
-      returning = sessionStorage.getItem("left-chat-return") === "1";
+      returning = sessionStorage.getItem("left-chat-return") === "1" || !!sessionStorage.getItem("left-chat-intro-time");
       sessionStorage.removeItem("left-chat-return");
     } catch (_) {}
     try {
-      returning ||= /\/(route|music)\.html$/.test(new URL(document.referrer).pathname);
+      returning ||= /\/(route|music|message-wall)\.html$/.test(new URL(document.referrer).pathname);
     } catch (_) {}
     if (returning || (history.state && history.state.leftChatVisited)) restoreBase();
     else firstTimer = setTimeout(receiveIntro, config.firstMessageDelay);
