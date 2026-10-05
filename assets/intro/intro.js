@@ -125,7 +125,8 @@
   prepareFlicker();
   $("screen-fallback").src=c.screenFallback;
   flicker.poster=movie.poster=c.screenFallback;
-  flicker.src = c.flickerVideo;
+  flicker.src = matchMedia("(max-width: 767px)").matches && c.flickerVideoMobile
+    ? c.flickerVideoMobile : c.flickerVideo;
   // Load the main movie only on the screen gesture, preserving iOS playback permission.
   movie.preload = "none";
   movie.loop = false;

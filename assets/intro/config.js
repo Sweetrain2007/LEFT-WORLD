@@ -1,5 +1,6 @@
 window.LEFT_INTRO_CONFIG = {
   flickerVideo: "assets/intro/screen-flicker-h264.mp4",
+  flickerVideoMobile: "assets/intro/screen-flicker-mobile-h264.mp4",
   screenFallback: "assets/intro/screen-fallback.webp",
   mediaTimeout: 8000,
   introVideo: "assets/intro/new-intro-video-h264.mp4",
